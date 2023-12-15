@@ -1,0 +1,10 @@
+var express = require('express')
+const { getCategorie, Addcategorie, UpdateCategorie, DeleteCategorie, DeleteManyCategorie } = require('../controllers/categorieController')
+const { categorievalidation, validation } = require('../middleware/validation')
+var categorieRoute = express.Router()
+categorieRoute.get('/all',getCategorie)
+categorieRoute.post('/categorie',categorievalidation,validation,Addcategorie)
+categorieRoute.put('/updatecatg/:id',categorievalidation,validation,UpdateCategorie)
+categorieRoute.delete('/deletecatg/:id',DeleteCategorie)
+categorieRoute.delete('/deletemanycatg',DeleteManyCategorie)
+module.exports = categorieRoute 
