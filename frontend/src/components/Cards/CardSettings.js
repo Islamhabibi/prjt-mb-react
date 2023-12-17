@@ -3,6 +3,7 @@ import useravatar from '../../assets/img/avatars/1.png'
 import { useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { UpdateUser } from '../Redux/Action/TeamAction'
+import Form from "react-bootstrap/Form";
 import axios from 'axios'
 function CardSettings({ data }) {
   const [FullName, setFullName] = useState(data.FullName);
@@ -11,14 +12,17 @@ function CardSettings({ data }) {
   const [Email,setEmail]= useState(data.Email)
   const [Phone,setPhone]= useState(data.Phone)
   const [Avatar,setAvatar] = useState([])
-  const [Statut,setStatut]= useState(data.isEnabled)
+  const [isEnabled,setIsEnabled]= useState(data.isEnabled)
   const [Profile, setProfile] = useState(data.Profile);
-  console.log(data.Profile)
+  
+
+//fin modification statut
+
   const handleChange = (event) => {
     setProfile(event.target.value);
   };
-  console.log(Profile)
   const dispatch = useDispatch();
+
   const Update = async () => {
     const formaData=new FormData()
     formaData.append('file',Avatar)
@@ -29,21 +33,21 @@ function CardSettings({ data }) {
     .then(res=> 
          dispatch
           (UpdateUser(data._id,
-            {FullName,UserName,Email,Password,Phone,Profile,Statut,Avatar:res.data.url}
+            {FullName,UserName,Email,Password,Phone,Profile,isEnabled,Avatar:res.data.url}
             )
           )
         
         )
-        console.log('image'+formaData)
+        
       }else{
             dispatch
             (UpdateUser(data._id,
-                {FullName,UserName,Email,Password,Phone,Profile,Statut,Avatar:data.image}
+                {FullName,UserName,Email,Password,Phone,Profile,isEnabled,Avatar:data.image}
                 )
             ); 
             }
   };
-  
+  console.log({FullName,UserName,Email,Password,Phone,Profile,isEnabled,Avatar:data.image})
   return (
     <>
       <div className="container-xxl flex-grow-1 container-p-y">
@@ -97,12 +101,12 @@ function CardSettings({ data }) {
                     >
                       <span className="d-none d-sm-block">Upload new photo</span>
                       <i className="mdi mdi-tray-arrow-up d-block d-sm-none" />
-                      <input
+                      <Form.Control
                         type="file"
-                        id="upload"
-                        className="account-file-input"
-                        hidden=""
-                        accept="image/png, image/jpeg"
+                        accept="image/*"
+                      
+                        autoFocus
+                        onChange={(e) => setAvatar(e.target.files[0])}
                       />
                     </label>
                     <button
@@ -201,9 +205,36 @@ function CardSettings({ data }) {
                         <label htmlFor="language">Profile</label>
                       </div>
                     </div>
-                    {/************ */}
+                    {/************(data.isEnabled === true )?(checked):(traitement2) */}
                     <div class="col-md-6">
-                    {(data.isEnabled)?
+                      <label class="d-block form-label">Statut</label>
+                      <div class="form-check mb-2">
+                         
+                          <input
+                            type="radio"
+                            id="active"
+                            name="satatus active"
+                            className="form-check-input"
+                            required=""
+                            //defaultChecked={(data.isEnabled)===true ? "Checked" : ""}
+                            onChange={(e)=>{ setIsEnabled(true)}}
+                          />
+                        <label class="form-check-label" for="active">Active</label>
+                      </div>
+                      <div class="form-check">
+                        <input 
+                          type="radio" 
+                          id="desactive" 
+                          name="statuts desactive" 
+                          class="form-check-input" 
+                          value="inactive"
+                          required=""
+                          defaultChecked=""
+                          onChange={(e)=>setIsEnabled(false)}/>
+                        <label class="form-check-label" for="desactive">Desactive</label>
+                      </div>
+                    </div>
+                    {/*(data.isEnabled)?(traitement1):(traitement2)
                 (<label class="switch switch-primary">
                         <input type="checkbox" class="switch-input" required=""/>
                         <span class="switch-toggle-slider">

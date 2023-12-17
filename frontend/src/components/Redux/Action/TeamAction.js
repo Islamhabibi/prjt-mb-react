@@ -41,8 +41,7 @@ export const UpdateUser = (id,data) => async(dispatch) =>
     try {
         const res=await axios
             .put('/team/updateuser/'+id,data)
-            .then((res)=>dispatch(GetUser()))
-            console.log('update'+res)
+            .then((res)=>dispatch(GetUser(id)))
     } catch (error) {
         console.log(error)
     }

@@ -33,7 +33,7 @@ exports.getuser = async (req,res) =>
             // If user data is not found
             return res.status(404).send({ message: 'User not found' });
           }
-        console.log('getuser contorller ',userdata)
+        //console.log('getuser contorller ',userdata)
         
             res.status(200)
             .send({message:'List of users',userdata})
@@ -168,9 +168,9 @@ exports.UpdateUser = async (req, res) => {
         const userUpdate = await Team.findById(req.params.id);
         if (userUpdate) {
            // if (req.body) {
-                console.log(req.body)
+                
                 const { FullName, UserName, Avatar, Email, Password, isEnabled, Profile,Phone } = req.body;
-
+                console.log(req.body)
                 //hash password
                 if (Password) {
                     const salt = await bcrypt.genSalt(10);
