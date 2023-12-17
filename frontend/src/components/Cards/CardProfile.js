@@ -27,54 +27,42 @@ function CardProfile() {
         </li>
         <li className="d-flex align-items-center mb-3">
           <i className="mdi mdi-check mdi-24px" />
-          <span className="fw-medium mx-2">Status:</span> <span>Active</span>
-        </li>
+          <span className="fw-medium mx-2">Status:</span> 
+          {(user.isEnabled)?
+                (<span
+                  className="badge rounded-pill bg-label-success"
+                  text-capitalized=""
+                >
+                  Active
+                </span>)
+                :
+                <span class="badge rounded-pill bg-label-secondary"
+                 text-capitalized=""
+                 >
+                  Inactive</span>
+                }
+         </li>
         <li className="d-flex align-items-center mb-3">
           <i className="mdi mdi-star-outline mdi-24px" />
-          <span className="fw-medium mx-2">Role:</span> <span>Developer</span>
+          <span className="fw-medium mx-2">Role:</span> <span>{user.Profile}</span>
         </li>
-        <li className="d-flex align-items-center mb-3">
-          <i className="mdi mdi-flag-outline mdi-24px" />
-          <span className="fw-medium mx-2">Country:</span> <span>USA</span>
-        </li>
-        <li className="d-flex align-items-center mb-1">
-          <i className="mdi mdi-translate mdi-24px" />
-          <span className="fw-medium mx-2">Languages:</span>{" "}
-          <span>English</span>
-        </li>
+        
       </ul>
       <small className="card-text text-uppercase">Contacts</small>
       <ul className="list-unstyled my-3 py-1">
         <li className="d-flex align-items-center mb-3">
           <i className="mdi mdi-phone-outline mdi-24px" />
-          <span className="fw-medium mx-2">Contact:</span>{" "}
-          <span>(123) 456-7890</span>
+          <span className="fw-medium mx-2">Phone:</span>{" "}
+          <span>(216) {user.Phone}</span>
         </li>
-        <li className="d-flex align-items-center mb-3">
-          <i className="mdi mdi-message-outline mdi-24px" />
-          <span className="fw-medium mx-2">Skype:</span> <span>john.doe</span>
-        </li>
+         
         <li className="d-flex align-items-center mb-1">
           <i className="mdi mdi-email-outline mdi-24px" />
           <span className="fw-medium mx-2">Email:</span>{" "}
-          <span>john.doe@example.com</span>
+          <span>{user.Email}</span>
         </li>
       </ul>
-      <small className="card-text text-uppercase">Teams</small>
-      <ul className="list-unstyled mb-0 mt-3 pt-1">
-        <li className="d-flex align-items-center mb-3">
-          <div className="d-flex flex-wrap">
-            <span className="fw-medium me-2">Backend Developer</span>
-            <span>(126 Members)</span>
-          </div>
-        </li>
-        <li className="d-flex align-items-center">
-          <div className="d-flex flex-wrap">
-            <span className="fw-medium me-2">React Developer</span>
-            <span>(98 Members)</span>
-          </div>
-        </li>
-      </ul>
+      
     </div>
   </div>
   </div>

@@ -32,7 +32,7 @@ function App() {
        <Route path='/register' element={<Register />} />
        <Route path='/login' element={<Login />} />
        <Route path='/dashboard' element={<CardListUseres/>}/>
-       <Route path='/settings' element={<Settings/>}/>
+       <Route path='/settings/:id' element={<Settings/>}/>
        <Route path='/profile/:id' element={<CardProfile/>}/>
      </Routes>
       

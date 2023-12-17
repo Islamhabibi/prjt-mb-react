@@ -206,7 +206,7 @@ exports.UpdateUser = async (req, res) => {
 exports.DeleteUser= async (req,res)=>
 {
     try {
-        const userDelete = await Team.findOneAndDelete(req.params.id)
+        const userDelete = await Team.findByIdAndDelete(req.params.id)
         res.status(200)
             .send({message: 'User deleted ', userDelete})
     } catch (error) {

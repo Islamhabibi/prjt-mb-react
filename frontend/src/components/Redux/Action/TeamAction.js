@@ -30,8 +30,32 @@ export const GetUser = (id) => async(dispatch) =>
         const res=await axios
             .get('/team/user/'+id)
             .then((res)=>dispatch({type:GETUSER,payload:res.data.userdata}))
-            console.log(res.data.userdata)
+            console.log(res)
     } catch (error) {
         console.log(error)
+    }
+}
+
+export const UpdateUser = (id,data) => async(dispatch) =>
+{
+    try {
+        const res=await axios
+            .put('/team/updateuser/'+id,data)
+            .then((res)=>dispatch(GetUser()))
+            console.log('update'+res)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const DeleteUser = (id) => async (dispatch) =>
+{
+    try {
+        const res = await axios
+            .delete('/team/deleteUser/'+id)
+            .then((res)=>dispatch(GetUsersTeam()))
+            console.log(res)
+    } catch (error) {
+        
     }
 }

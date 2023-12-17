@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { GetUsersTeam } from '../Redux/Action/TeamAction'
+import { DeleteUser, GetUsersTeam } from '../Redux/Action/TeamAction'
+import Icon from '@mdi/react';
+import { Link, Route, Routes } from 'react-router-dom';
+import { mdiDeleteAlert, mdiEyeSettings, mdiLeadPencil } from '@mdi/js';
+import Settings from '../../views/admin/Settings'
 function CardListUseres() {
   const dispatch = useDispatch()
   useEffect(()=>{
@@ -198,7 +202,7 @@ function CardListUseres() {
           <tbody>
              {/* donnees user*/}
             {
-              userFormState.map((e)=>(
+              userFormState?.map((e)=>(
                 <tr className="odd">
               <td
                 className="  control"
@@ -262,6 +266,16 @@ function CardListUseres() {
               </td>
               <td>
                 <div className="d-inline-block text-nowrap">
+                <span onClick={()=>dispatch(DeleteUser(e._id))}><Icon path={mdiDeleteAlert} size={1} /></span>
+                <span> <Icon path={mdiLeadPencil} size={1} /></span>
+                
+                <Link to={`/settings/${e._id}`}><Icon path={mdiEyeSettings} size={1} /></Link>
+
+                </div>
+               </td> 
+              {/* 
+              <td>
+                <div className="d-inline-block text-nowrap">
                   <button
                     className="btn btn-sm btn-icon btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow"
                     data-bs-toggle="dropdown"
@@ -278,7 +292,7 @@ function CardListUseres() {
                     </a>
                     <a href="javascript:;" className="dropdown-item">
                       <i className="mdi mdi-pencil-outline me-2" />
-                      <span>Edit</span>
+                      <span><Settings data={e}/> Edit</span>
                     </a>
                     <a
                       href="javascript:;"
@@ -289,7 +303,7 @@ function CardListUseres() {
                     </a>
                   </div>
                 </div>
-              </td>
+              </td>*/}
             </tr>
               ))
             }
