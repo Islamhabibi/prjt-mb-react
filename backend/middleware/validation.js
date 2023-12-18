@@ -10,8 +10,9 @@ exports.teamvalidation= [
     body("Email","Your email is invalid").isEmail(),
     body("Password","Minimum length 8 characters ").isLength({min:8})
 ]
-exports.loginvalidation = [
-    
+exports.loginvalidation= [
+    body("email","email is note valide").isEmail(),
+    body("password","minimum length 8 cara").isLength({min:7})
 ]
 exports.validation = (req,res,next)=>{
     const error = validationResult(req)

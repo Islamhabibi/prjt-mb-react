@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {ALLTEAM, GETUSER, REGISTERTEAM} from '../Actiontype/TeamActionType'
+import {ALLTEAM, GETCURRENT, GETUSER, LOGINTEAM, LOGOUT, REGISTERTEAM} from '../Actiontype/TeamActionType'
 export const RegisterTeam =(data,navigate) => async (dispatch) =>
 {
     try {
@@ -55,6 +55,38 @@ export const DeleteUser = (id) => async (dispatch) =>
             .then((res)=>dispatch(GetUsersTeam()))
             console.log(res)
     } catch (error) {
-        
+        console.log(error)
     }
 }
+export const LoginUser = (data,navigate) => async (dispatch) =>
+{
+    try {
+        const res = await axios
+            .post('/team/login',data)
+            .then((res=>dispatch({type:LOGINTEAM, payload:res.data})))
+            navigate('/dashboard')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getcurrent=()=>async(dispatch)=>
+{
+    const config={
+        headers:{token:localStorage.getItem("token")}
+    }
+    try {
+       const res=await axios.get("/team/getcurrent",config) 
+       console.log(res)
+  .then(res=>dispatch({type:GETCURRENT,payload:res.data}))
+    } catch (error) {
+        console.log(error)
+    }
+}
+export const logout = ()=>{
+    localStorage.removeItem('token')
+    
+    return{
+      type:LOGOUT
+    }
+  }

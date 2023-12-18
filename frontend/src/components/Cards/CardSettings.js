@@ -1,8 +1,8 @@
 import React, { Profiler, useEffect, useState } from 'react'
 import useravatar from '../../assets/img/avatars/1.png'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { UpdateUser } from '../Redux/Action/TeamAction'
+import { DeleteUser, UpdateUser } from '../Redux/Action/TeamAction'
 import Form from "react-bootstrap/Form";
 import axios from 'axios'
 function CardSettings({ data }) {
@@ -14,12 +14,13 @@ function CardSettings({ data }) {
   const [Avatar,setAvatar] = useState([])
   const [isEnabled,setIsEnabled]= useState(data.isEnabled)
   const [Profile, setProfile] = useState(data.Profile);
-  
+
+  const navigate = useNavigate()
 
 //fin modification statut
 
-  const handleChange = (event) => {
-    setProfile(event.target.value);
+  const handleChangeprofile = (e) => {
+    setProfile(e.target.value);
   };
   const dispatch = useDispatch();
 
@@ -47,8 +48,7 @@ function CardSettings({ data }) {
             ); 
             }
   };
-  console.log({FullName,UserName,Email,Password,Phone,Profile,isEnabled,Avatar:data.image})
-  return (
+   return (
     <>
       <div className="container-xxl flex-grow-1 container-p-y">
         <h4 className="py-3 mb-4">
@@ -172,7 +172,7 @@ function CardSettings({ data }) {
                       <div className="form-floating form-floating-outline">
                         <input
                           className="form-control"
-                          type="text"
+                          type="email"
                           id="email"
                           name="email"
                           defaultValue={data.Email}
@@ -197,7 +197,12 @@ function CardSettings({ data }) {
                     </div>   
                    <div className="col-md-6">
                       <div className="form-floating form-floating-outline">
-                        <select id="language" className="select2 form-select">
+                        <select 
+                          className="select2 form-select"
+                          id="userRole"
+                          name="userRole"
+                          value={data.Profile}
+                          onChange={handleChangeprofile}>
                           <option value="">{data.Profile}</option>
                           <option value="Admin">Admin</option>
                           <option value="SuperAdmin">Super Admin</option>
@@ -292,7 +297,8 @@ function CardSettings({ data }) {
                       I confirm my account deactivation
                     </label>
                   </div>
-                  <button type="submit" className="btn btn-danger">
+                  <button type="submit" className="btn btn-danger" 
+                    onClick={()=>dispatch(DeleteUser(data._id),navigate("/dashboard"))}>
                     Deactivate Account
                   </button>
               </div>

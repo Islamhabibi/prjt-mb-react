@@ -5,6 +5,7 @@ import Icon from '@mdi/react';
 import { Link, Route, Routes } from 'react-router-dom';
 import { mdiDeleteAlert, mdiEyeSettings, mdiLeadPencil } from '@mdi/js';
 import Settings from '../../views/admin/Settings'
+import CardAddTeam from './CardAddTeam';
 function CardListUseres() {
   const dispatch = useDispatch()
   useEffect(()=>{
@@ -102,17 +103,7 @@ function CardListUseres() {
                 </div>
               </div>
               <div className="add-new">
-                <button
-                  className="btn btn-primary"
-                  data-bs-toggle="offcanvas"
-                  data-bs-target="#offcanvasAddUser" 
-                >
-                  <i className="mdi mdi-plus me-0 me-sm-1" />
-                  <span className="d-none d-sm-inline-block">
-                    {" "}
-                    Add New User{" "}
-                  </span>
-                </button>
+              <CardAddTeam/>
               </div>
             </div>
           </div>

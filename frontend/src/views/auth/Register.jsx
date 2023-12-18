@@ -30,18 +30,18 @@ const Adduserteam =()=>
   return (
     <>
     <div className="position-relative">
-<div className="authentication-wrapper authentication-basic container-p-y">
-<div className="authentication-inner py-4">
-  <div className="card p-2">
-    <div className="app-brand justify-content-center mt-5">
-      <a href="index.html" className="app-brand-link gap-2">
-        <img
-          src= {logo}
-          alt="auth-tree"
-          className="app-brand-logo demo"
-        />
-      </a>
-    </div>
+    <div className="authentication-wrapper authentication-basic container-p-y">
+    <div className="authentication-inner py-4">
+      <div className="card p-2">
+        <div className="app-brand justify-content-center mt-5">
+          <a href="index.html" className="app-brand-link gap-2">
+            <img
+              src= {logo}
+              alt="auth-tree"
+              className="app-brand-logo demo"
+            />
+          </a>
+        </div>
     {/*formaulaire */}
     <div className="card-body mt-2">
   <h4 className="mb-2">Adventure starts here 🚀</h4>

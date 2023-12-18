@@ -60,11 +60,15 @@ exports.AddUser = async (req,res)=>
         res.status(400)
         .send({message:'User  already exits',userExist})
     }
+    //lingne ajouter
+    const user = new Team(req.body)
     //hash password
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(Password,salt)
+    const token=jwt.sign({id:user._id},"123456")
+    await user.save()
     //create user
-    const user = await Team.create({FullName,UserName,Password:hashedPassword,Email,Avatar,isEnabled,Profile,Phone})
+    //const user = await Team.create({FullName,UserName,Password:hashedPassword,Email,Avatar,isEnabled,Profile,Phone})
     if (user)
     {
         res.status(200).json({
@@ -105,23 +109,25 @@ exports.LoginUser= async (req,res)=>
         res.status(400)
         .send({message:'Please include all filds'})
     }
-    const user= await Team.findOne({Email})
-    if (user &&
-        (await bcrypt.compare(
-            typeof Password === 'undefined'? '': Password,
-            user.Password
-        ))
-        ){
-            res.status(200).json({
-                _id: user.id,
-                UserName: user.UserName,
-                Email: user.Email,
-                token : generateToken(user.id)
-            })
-        }else {
-            res.status(400)
-            .send({message:'Invalid credentials'})
-        }
+
+    try {
+        const user= await Team.findOne({Email})
+        if (user &&
+            (await bcrypt.compare(
+                typeof Password === 'undefined'? '': Password,
+                user.Password
+            ))
+            ){res.status(200).json({user:user,
+                token: generateToken(user.id),
+              });
+            }else {
+                res.status(400)
+                .send({message:'Invalid credentials'})
+            }
+    } catch (error) {
+        res.status(500)
+        .send(error)
+    }
 }
 /**
  * @route PUT /team/updateuser/id
