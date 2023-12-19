@@ -19,8 +19,7 @@ function Dashboard() {
       {/* Content wrapper */}
       <div className="content-wrapper">
         {/* Content */}
-        <div className="container-xxl flex-grow-1 container-p-y">
-          <div className="row gy-4">
+           <div className="row gy-4">
             {/* Congratulations card */}
             <div className="col-md-12 col-lg-4">
               <div className="card">
@@ -1143,7 +1142,7 @@ function Dashboard() {
     </div>
     {/* / Layout page */}
   </div>
-</div>
+ 
 
     </>
   )

@@ -11,7 +11,7 @@ function CardListUseres() {
   useEffect(()=>{
     dispatch(GetUsersTeam())
   },[])
-  const userFormState = useSelector((state)=> state.users)
+  const userFormState = useSelector((state)=> state.team.users)
   console.log(userFormState)
   return (
     <>
@@ -348,54 +348,7 @@ function CardListUseres() {
                     1
                   </a>
                 </li>
-                <li className="paginate_button page-item ">
-                  <a
-                    href="#"
-                    aria-controls="DataTables_Table_0"
-                    role="link"
-                    data-dt-idx={1}
-                    tabIndex={0}
-                    className="page-link"
-                  >
-                    2
-                  </a>
-                </li>
-                <li className="paginate_button page-item ">
-                  <a
-                    href="#"
-                    aria-controls="DataTables_Table_0"
-                    role="link"
-                    data-dt-idx={2}
-                    tabIndex={0}
-                    className="page-link"
-                  >
-                    3
-                  </a>
-                </li>
-                <li className="paginate_button page-item ">
-                  <a
-                    href="#"
-                    aria-controls="DataTables_Table_0"
-                    role="link"
-                    data-dt-idx={3}
-                    tabIndex={0}
-                    className="page-link"
-                  >
-                    4
-                  </a>
-                </li>
-                <li className="paginate_button page-item ">
-                  <a
-                    href="#"
-                    aria-controls="DataTables_Table_0"
-                    role="link"
-                    data-dt-idx={4}
-                    tabIndex={0}
-                    className="page-link"
-                  >
-                    5
-                  </a>
-                </li>
+               
                 <li
                   className="paginate_button page-item next"
                   id="DataTables_Table_0_next"

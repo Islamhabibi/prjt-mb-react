@@ -21,8 +21,8 @@ function CardAddTeam() {
     });
     const [Profile, setProfile] = useState('')
     const [isEnabled, setIsEnabled] = useState('')
-    console.log(isEnabled)
-    console.log(formData)
+    //console.log(isEnabled)
+   // console.log(formData)
     const onChange = e => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
@@ -30,7 +30,7 @@ function CardAddTeam() {
     //function pour dispatche la fct dans l'actionteam
     const Adduserteam = () => {
         dispatch(RegisterTeam(formData, Profile, isEnabled, navigate))
-        console.log(formData)
+        //console.log(formData)
         handleClose()
     }
     const dispatch = useDispatch()

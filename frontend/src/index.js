@@ -11,6 +11,8 @@ import '@mdi/font/css/materialdesignicons.min.css';
 import './assets/styles/node-waves.css'
 import './assets/styles/css/datatables.bootstrap5.css'
 import './assets/styles/css/responsive.bootstrap5.css'
+import'./assets/libs/bs-stepper/bs-stepper.css'
+
 import  store from './components/Redux/Store'
 
 import Icon from '@mdi/react';

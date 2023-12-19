@@ -34,7 +34,7 @@ function CardSettings({ data }) {
     .then(res=> 
          dispatch
           (UpdateUser(data._id,
-            {FullName,UserName,Email,Password,Phone,Profile,isEnabled,Avatar:res.data.url}
+            {FullName,UserName,Email,Password,Phone,Profile,isEnabled,Avatar:res.data.url},navigate
             )
           )
         
@@ -50,8 +50,8 @@ function CardSettings({ data }) {
   };
    return (
     <>
-      <div className="container-xxl flex-grow-1 container-p-y">
-        <h4 className="py-3 mb-4">
+       
+        {/*<h4 className="py-3 mb-4">
           <span className="text-muted fw-light">Account Settings /</span> Account
         </h4>
         <div className="row">
@@ -81,7 +81,7 @@ function CardSettings({ data }) {
                   Connections
                 </a>
               </li>
-            </ul>
+            </ul>*/}
             <div className="card mb-4">
               <h4 className="card-header">Profile Details</h4>
               {/* Account */}
@@ -303,9 +303,9 @@ function CardSettings({ data }) {
                   </button>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+           
+         
+       
 
     </>
   )

@@ -1,23 +1,24 @@
 import axios from 'axios'
-import {ALLTEAM, GETCURRENT, GETUSER, LOGINTEAM, LOGOUT, REGISTERTEAM} from '../Actiontype/TeamActionType'
-export const RegisterTeam =(data,navigate) => async (dispatch) =>
+import { ALLCUSTOMER, GETUSER, LOGINCUSTOMER, REGISTERCUSTOMER } from '../Actiontype/CustomerActionType'
+import {  GETCURRENT,LOGOUT } from '../Actiontype/TeamActionType'
+export const RegisterCustomer =(data,navigate) => async (dispatch) =>
 {
     try {
         const res = await axios
-            .post('/team/adduser',data)//team (dans le server)/ dans le teamRoutes
-            dispatch({type: REGISTERTEAM, payload: res.data})
-            navigate('/dashboard')
+            .post('/customer/register',data)//team (dans le server)/ dans le teamRoutes
+            dispatch({type: REGISTERCUSTOMER, payload: res.data})
+            navigate('/')
     } catch (error) {
         console.log(error)
     }
 }
 
-export const GetUsersTeam=() => async(dispatch) =>
+export const GetUsersCustomer=() => async(dispatch) =>
 {
     try {
         const res= await axios
-            .get('/team/all')
-            .then((res)=>dispatch({type:ALLTEAM,payload:res.data.AllUsers}))
+            .get('/customer/all')
+            .then((res)=>dispatch({type:ALLCUSTOMER,payload:res.data.AllCustomers}))
             console.log(res.data)
     } catch (error) {
         console.log(error)
@@ -28,7 +29,7 @@ export const GetUser = (id) => async(dispatch) =>
 { 
     try {
         const res=await axios
-            .get('/team/user/'+id)
+            .get('/customer/user/'+id)
             .then((res)=>dispatch({type:GETUSER,payload:res.data.userdata}))
             console.log(res)
     } catch (error) {
@@ -40,7 +41,7 @@ export const UpdateUser = (id,data,navigate) => async(dispatch) =>
 {
     try {
         const res=await axios
-            .put('/team/updateuser/'+id,data)
+            .put('/customer/updateuser/'+id,data)
             .then((res)=>dispatch(GetUser(id)))
              navigate('/dashboard')
     } catch (error) {
@@ -52,8 +53,8 @@ export const DeleteUser = (id) => async (dispatch) =>
 {
     try {
         const res = await axios
-            .delete('/team/deleteUser/'+id)
-            .then((res)=>dispatch(GetUsersTeam()))
+            .delete('/customer/deleteUser/'+id)
+            .then((res)=>dispatch(GetUsersCustomer()))
             console.log(res)
     } catch (error) {
         console.log(error)
@@ -63,8 +64,8 @@ export const LoginUser = (data,navigate) => async (dispatch) =>
 {
     try {
         const res = await axios
-            .post('/team/login',data)
-            .then((res=>dispatch({type:LOGINTEAM, payload:res.data})))
+            .post('/customer/login',data)
+            .then((res=>dispatch({type:LOGINCUSTOMER, payload:res.data})))
             navigate('/dashboard')
     } catch (error) {
         console.log(error)
@@ -78,13 +79,14 @@ export const getcurrent=()=>async(dispatch)=>
     }
     try {
        const res=await axios
-        .get("/team/getcurrent",config) 
+        .get("/customer/getcurrent",config) 
         .then(res=>dispatch({type:GETCURRENT,payload:res.data}))
     } catch (error) {
         console.log(error)
     }
 }
-export const logout = (navigate)=>{
+export const logout = (navigate)=>
+{
     localStorage.removeItem('tokenuser')
     navigate('/login')
     return{

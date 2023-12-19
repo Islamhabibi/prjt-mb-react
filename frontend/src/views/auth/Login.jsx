@@ -42,7 +42,7 @@ function Login() {
           </p>
              <div className="form-floating form-floating-outline mb-3">
               <input
-                type="text"
+                type="email"
                 className="form-control"
                 id="email"
                 name="Email"

@@ -1,0 +1,15 @@
+var express = require('express')
+const { getCustomer, Register, LoginUser, UpdateUser, getuser,DeleteUser } = require('../controllers/CustomerController')
+const { customervalidation, validation, loginvalidation } = require('../middleware/validation')
+const { IsAuthCustomer } = require('../middleware/IsAuth')
+ var customerRoute = express.Router()
+customerRoute.get('/all',getCustomer)
+customerRoute.post('/register',customervalidation,validation,Register)
+customerRoute.post('/login',loginvalidation,validation,LoginUser)
+customerRoute.put('/update/:id',UpdateUser)
+customerRoute.delete('/deletcustomer/:id',DeleteUser)
+customerRoute.get('/user/:id',getuser)
+customerRoute.get('/getcurrent',IsAuthCustomer,(req,res)=>{
+    res.send(req.user)
+})
+module.exports = customerRoute

@@ -10,24 +10,52 @@ function CardProfile() {
   useEffect(()=>{
     dispatch(GetUser(id.id))
   },[])
-  const user = useSelector((state)=> state.user)
+  const user = useSelector((state)=> state.team.user)
   console.log(user)
   return (
     <>
   {/* About User */}
-  <div className="container-xxl flex-grow-1 container-p-y">
   <div className="card mb-4">
     <div className="card-body">
-      <small className="card-text text-uppercase">About</small>
-      <ul className="list-unstyled my-3 py-1">
-        <li className="d-flex align-items-center mb-3">
-          <i className="mdi mdi-account-outline mdi-24px" />
-          <span className="fw-medium mx-2">Full Name:</span>{" "}
-          <span>{user.FullName}</span>
+    <div className="user-avatar-section">
+      <div className=" d-flex align-items-center flex-column">
+        <img
+          className="img-fluid rounded mb-3 mt-4"
+          src={user.Avatar}
+          height={120}
+          width={120}
+          alt="User avatar"
+        />
+        <div className="user-info text-center">
+          <h4>{user.FullName}</h4>
+          <span className="badge bg-label-danger rounded-pill">
+            {user.Profile}
+          </span>
+        </div>
+      </div>
+    </div>
+    <h5 className="pb-3 border-bottom mb-3">Details</h5>
+    <div className="info-container">
+      <ul className="list-unstyled mb-4">
+        <li className="mb-3">
+          <span className="h6">Username: </span>
+          <span> {user.UserName}</span>
         </li>
-        <li className="d-flex align-items-center mb-3">
-          <i className="mdi mdi-check mdi-24px" />
-          <span className="fw-medium mx-2">Status:</span> 
+        <li className="mb-3">
+          <span className="h6">Email: </span>
+          <span> {user.Email}</span>
+        </li>
+        <li className="mb-3">
+          <span className="h6">Phone: </span>
+          <span>(+216) {user.Phone}</span>
+        </li>
+        <li className="mb-3">
+          <span className="h6">Role: </span>
+          <span>{user.Profile}</span>
+        </li>
+        
+        <li className="mb-3">
+          <span className="h6">Status: </span>
           {(user.isEnabled)?
                 (<span
                   className="badge rounded-pill bg-label-success"
@@ -41,31 +69,36 @@ function CardProfile() {
                  >
                   Inactive</span>
                 }
-         </li>
-        <li className="d-flex align-items-center mb-3">
-          <i className="mdi mdi-star-outline mdi-24px" />
-          <span className="fw-medium mx-2">Role:</span> <span>{user.Profile}</span>
-        </li>
-        
-      </ul>
-      <small className="card-text text-uppercase">Contacts</small>
-      <ul className="list-unstyled my-3 py-1">
-        <li className="d-flex align-items-center mb-3">
-          <i className="mdi mdi-phone-outline mdi-24px" />
-          <span className="fw-medium mx-2">Phone:</span>{" "}
-          <span>(216) {user.Phone}</span>
+           
         </li>
          
-        <li className="d-flex align-items-center mb-1">
-          <i className="mdi mdi-email-outline mdi-24px" />
-          <span className="fw-medium mx-2">Email:</span>{" "}
-          <span>{user.Email}</span>
-        </li>
+         
       </ul>
+      {/** 
+      <div className="d-flex justify-content-center">
+        <a
+          href="javascript:;"
+          className="btn btn-primary me-3 waves-effect waves-light"
+          data-bs-target="#editUser"
+          data-bs-toggle="modal"
+        >
+          Edit
+        </a>
+        <a
+          href="javascript:;"
+          className="btn btn-outline-danger suspend-user waves-effect"
+        >
+          Suspend
+        </a>
+      </div>*/}
+    </div>
+       
+       
+       
       
     </div>
   </div>
-  </div>
+  
   {/*/ About User */}
   {/* Profile Overview */}
   {/*/ Profile Overview */}
