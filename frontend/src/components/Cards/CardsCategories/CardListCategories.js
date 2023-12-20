@@ -1,20 +1,21 @@
+import { mdiDeleteAlert, mdiEyeSettings, mdiLeadPencil } from '@mdi/js'
+import Icon from '@mdi/react'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { DeleteUser, GetUsersTeam } from '../Redux/Action/TeamAction'
-import Icon from '@mdi/react';
-import { Link, Route, Routes } from 'react-router-dom';
-import { mdiDeleteAlert, mdiEyeSettings, mdiLeadPencil } from '@mdi/js';
-import CardAddTeam from './CardAddTeam';
-function CardListUseres() {
-  const dispatch = useDispatch()
+import { Link } from 'react-router-dom'
+import { DeleteCategorie, GetCategories } from '../../Redux/Action/CategorieAction'
+import CardAddCategorie from './CardAddCategorie'
+
+function CardListCategories() {
+    const dispatch = useDispatch()
   useEffect(()=>{
-    dispatch(GetUsersTeam())
+    dispatch(GetCategories())
   },[])
-  const userFormState = useSelector((state)=> state.team.users)
+  const userFormState = useSelector((state)=> state.categorie.categories)
   console.log(userFormState)
   return (
-    <>
-      <div className="container-xxl flex-grow-1 container-p-y">
+    < >
+         <div className="container-xxl flex-grow-1 container-p-y">
   {/* Users List Table */}
   <div className="card">
     <div className="card-header">
@@ -22,7 +23,7 @@ function CardListUseres() {
       <div className="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
         <div className="col-md-4 user_role">
           <select id="UserRole" className="form-select text-capitalize">
-            <option value=""> Select Role </option>
+            <option value=""> Select Statuts </option>
             <option value="Admin">Admin</option>
             <option value="Author">Author</option>
             <option value="Editor">Editor</option>
@@ -102,7 +103,7 @@ function CardListUseres() {
                 </div>
               </div>
               <div className="add-new">
-              <CardAddTeam/>
+              <CardAddCategorie data={userFormState}/>
               </div>
             </div>
           </div>
@@ -142,7 +143,7 @@ function CardListUseres() {
                 aria-label="User: activate to sort column ascending"
                 aria-sort="descending"
               >
-                User
+                Name
               </th>
               <th
                 className="sorting"
@@ -153,19 +154,9 @@ function CardListUseres() {
                 style={{ width: 336 }}
                 aria-label="Email: activate to sort column ascending"
               >
-                Email
+                Description
               </th>
-              <th
-                className="sorting"
-                tabIndex={0}
-                aria-controls="DataTables_Table_0"
-                rowSpan={1}
-                colSpan={1}
-                style={{ width: 148 }}
-                aria-label="Role: activate to sort column ascending"
-              >
-                Role
-              </th>
+              
               
               <th
                 className="sorting"
@@ -211,7 +202,7 @@ function CardListUseres() {
                   <div className="avatar-wrapper">
                     <div className="avatar avatar-sm me-3">
                       <img
-                        src={e.Avatar}
+                        src={e.Image_Categorie}
                         alt="Avatar"
                         className="rounded-circle"
                       />
@@ -222,21 +213,16 @@ function CardListUseres() {
                       href="app-user-view-account.html"
                       className="text-heading text-truncate"
                     >
-                      <span className="fw-medium">{e.FullName}</span>
+                      <span className="fw-medium">{e.Name}</span>
                     </a>
-                    <small>@{e.UserName}</small>
+                    
                   </div>
                 </div>
               </td>
               <td>
-                <span>{e.Email}</span>
+                <span>{e.Description}</span>
               </td>
-              <td>
-                <span className="text-truncate d-flex align-items-center">
-                  <i className="mdi mdi-chart-donut mdi-20px text-success me-2" />
-                  {e.Profile}
-                </span>
-              </td>
+              
               
               <td>
                 {(e.isEnabled)?
@@ -256,44 +242,14 @@ function CardListUseres() {
               </td>
               <td>
                 <div className="d-inline-block text-nowrap">
-                <span onClick={()=>dispatch(DeleteUser(e._id))}><Icon path={mdiDeleteAlert} size={1} /></span>
+                <span onClick={()=>dispatch(DeleteCategorie(e._id))}><Icon path={mdiDeleteAlert} size={1} /></span>
                 <span> <Icon path={mdiLeadPencil} size={1} /></span>
                 
                 <Link to={`/settings/${e._id}`}><Icon path={mdiEyeSettings} size={1} /></Link>
 
                 </div>
                </td> 
-              {/* 
-              <td>
-                <div className="d-inline-block text-nowrap">
-                  <button
-                    className="btn btn-sm btn-icon btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow"
-                    data-bs-toggle="dropdown"
-                  >
-                    <i className="mdi mdi-dots-vertical mdi-20px" />
-                  </button>
-                  <div className="dropdown-menu dropdown-menu-end m-0">
-                    <a
-                      href="app-user-view-account.html"
-                      className="dropdown-item"
-                    >
-                      <i className="mdi mdi-eye-outline me-2" />
-                      <span>View</span>
-                    </a>
-                    <a href="javascript:;" className="dropdown-item">
-                      <i className="mdi mdi-pencil-outline me-2" />
-                      <span><Settings data={e}/> Edit</span>
-                    </a>
-                    <a
-                      href="javascript:;"
-                      className="dropdown-item delete-record"
-                    >
-                      <i className="mdi mdi-delete-outline me-2" />
-                      <span>Delete</span>
-                    </a>
-                  </div>
-                </div>
-              </td>*/}
+              
             </tr>
               ))
             }
@@ -302,71 +258,7 @@ function CardListUseres() {
              
           </tbody>
         </table>
-        <div className="row mx-1">
-          <div className="col-sm-12 col-md-6">
-            <div
-              className="dataTables_info"
-              id="DataTables_Table_0_info"
-              role="status"
-              aria-live="polite"
-            >
-              Showing 1 to 10 of 50 entries
-            </div>
-          </div>
-          <div className="col-sm-12 col-md-6">
-            <div
-              className="dataTables_paginate paging_simple_numbers"
-              id="DataTables_Table_0_paginate"
-            >
-              <ul className="pagination">
-                <li
-                  className="paginate_button page-item previous disabled"
-                  id="DataTables_Table_0_previous"
-                >
-                  <a
-                    aria-controls="DataTables_Table_0"
-                    aria-disabled="true"
-                    role="link"
-                    data-dt-idx="previous"
-                    tabIndex={0}
-                    className="page-link"
-                  >
-                    Previous
-                  </a>
-                </li>
-                <li className="paginate_button page-item active">
-                  <a
-                    href="#"
-                    aria-controls="DataTables_Table_0"
-                    role="link"
-                    aria-current="page"
-                    data-dt-idx={0}
-                    tabIndex={0}
-                    className="page-link"
-                  >
-                    1
-                  </a>
-                </li>
-               
-                <li
-                  className="paginate_button page-item next"
-                  id="DataTables_Table_0_next"
-                >
-                  <a
-                    href="#"
-                    aria-controls="DataTables_Table_0"
-                    role="link"
-                    data-dt-idx="next"
-                    tabIndex={0}
-                    className="page-link"
-                  >
-                    Next
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
    
@@ -379,4 +271,4 @@ function CardListUseres() {
   )
 }
 
-export default CardListUseres
+export default CardListCategories

@@ -5,12 +5,12 @@ const {mongoose} = require('mongoose')
  * @desc Get categories data
  * @access Private
  */
-exports.getCategorie = async (req,res)=>
+exports.getCategories = async (req,res)=>
 {
     try {
-        const AllCategorie = await categories.find()
+        const AllCategories = await categories.find()
             res.status(200)
-            .send({message:'List of categories',AllCategorie})
+            .send({message:'List of categories',AllCategories})
     } catch (error) {
         res.status(500)
         .send({message:'Erreur'})
@@ -23,9 +23,9 @@ exports.getCategorie = async (req,res)=>
  * @access Public
  */
 exports.Addcategorie = async(req,res)=>
-{   const {Title}= req.body
+{   const {Name}= req.body
     // Check if categorie exists
-    const categorieExists = await categories.findOne({Title})
+    const categorieExists = await categories.findOne({Name})
     if (categorieExists){
         res.status(400)
         .send({message:"Categorie already exits ",categorieExists}) 
@@ -36,7 +36,7 @@ exports.Addcategorie = async(req,res)=>
     if(categorie){
         res.status(200).json({
             _id: categorie.id,
-            Title: categorie.Title,
+            Name: categorie.Name,
             Parent_Categorie: categorie.Parent_Categorie,
             Image_Categorie: categorie.Image_Categorie,
             Description: categorie.Description,
@@ -89,7 +89,7 @@ exports.DeleteCategorie = async (req,res)=>
  * @desc Delete many categorie
  * @access Public
  */
-exports.DeleteManyCategorie = async (req,res) => 
+exports.DeleteManyCategories = async (req,res) => 
 {
     const {dataid} = req.body
     try {

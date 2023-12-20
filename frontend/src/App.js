@@ -19,6 +19,8 @@ import { getcurrent } from './components/Redux/Action/TeamAction';
 import LoginCustomer from './views/Customer/LoginCustomer';
 import CardListCustomers from './components/Cards/CardListCustomers';
 import Index from './views/Index';
+import Dashboard from './views/admin';
+import CardListCategories from './components/Cards/CardsCategories/CardListCategories';
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -53,7 +55,8 @@ function App() {
       <Routes>
        <Route path='/register' element={<Register />} />
        <Route path='/login' element={<Login />} />
-       <Route path='/dashboard' element={<CardListUseres/>}/>
+       <Route path='/listcategories' element={<CardListCategories/>}/>
+       <Route path='/listuseres' element={<CardListUseres/>}/>
        <Route path='/settings/:id' element={<Settings/>}/>
        <Route path='/profile/:id' element={<CardProfile/>}/>
        <Route path='/registeruser' element={<Registercustomer/>}/>

@@ -1,8 +1,8 @@
 const {body,  validationResult}= require("express-validator")
 
 exports.categorievalidation= [
-    body("Title", "You have to put a category name").notEmpty(),
-    body("Title", "Minimum length 4 characters").isLength({min:4})
+    body("Name", "You have to put a category name").notEmpty(),
+    body("Name", "Minimum length 4 characters").isLength({min:4})
 ]
 exports.teamvalidation= [
     body("FullName","You have to put your first name").notEmpty(),

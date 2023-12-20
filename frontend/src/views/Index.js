@@ -3,14 +3,19 @@ import Carousel from '../components/Customerview/Carousel'
 import ProductsCarousel from '../components/Customerview/ProductsCarousel'
 import Davider from '../components/Customerview/Davider'
 import Collectioncateg from '../components/Customerview/Collectioncateg'
- function Index() {
+import FooterCustomer from '../components/Footers/FooterCustomer'
+import ProductsGroupe from '../components/Customerview/ProductsGroupe'
+  function Index() {
   return (
     <>
       <Carousel/>
+      <div class="container py-5">
       <Collectioncateg/>
-      <ProductsCarousel/>
-      <Davider/>
-      <ProductsCarousel/>
+      <ProductsCarousel/></div>
+      <Davider/><div class="container py-5">
+      <ProductsGroupe/>
+       </div>
+      <FooterCustomer/>
     </>
   )
 }

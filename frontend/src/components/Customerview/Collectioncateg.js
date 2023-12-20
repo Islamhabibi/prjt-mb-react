@@ -1,9 +1,14 @@
 import React from 'react'
-
+import clt1 from '../../assets/img/slider/papier2.jpg'
+import clt2 from '../../assets/img/slider/brosserie.jpg'
+import clt3 from '../../assets/img/slider/prd_hyg.jpg'
+import clt4 from '../../assets/img/slider/sac.jpg'
+import '../../assets/styles/css/style.default.css'
 function Collectioncateg() {
   return (
     < >
       <section className="pt-5">
+     
   <header className="text-center">
     <p className="small text-muted small text-uppercase mb-1">
       Carefully created collections
@@ -13,27 +18,27 @@ function Collectioncateg() {
   <div className="row">
     <div className="col-md-4">
       <a className="category-item" href="shop.html">
-        <img className="img-fluid" src="img/cat-img-1.jpg" alt="" />
-        <strong className="category-item-title">Clothes</strong>
+        <img className="img-fluid" src={clt1} alt="" />
+        <strong className="category-item-title">Wiping Paper</strong>
       </a>
     </div>
     <div className="col-md-4">
       <a className="category-item mb-4" href="shop.html">
-        <img className="img-fluid" src="img/cat-img-2.jpg" alt="" />
-        <strong className="category-item-title">Shoes</strong>
+        <img className="img-fluid" src={clt2} alt="" />
+        <strong className="category-item-title">Brush</strong>
       </a>
       <a className="category-item" href="shop.html">
-        <img className="img-fluid" src="img/cat-img-3.jpg" alt="" />
-        <strong className="category-item-title">Watches</strong>
+        <img className="img-fluid" src={clt3} alt="" />
+        <strong className="category-item-title">Hygiene products</strong>
       </a>
     </div>
     <div className="col-md-4">
       <a className="category-item" href="shop.html">
-        <img className="img-fluid" src="img/cat-img-4.jpg" alt="" />
-        <strong className="category-item-title">Electronics</strong>
+        <img className="img-fluid" src={clt4} alt="" />
+        <strong className="category-item-title">Trash</strong>
       </a>
     </div>
-  </div>
+  </div> 
 </section>
 
     </ >
