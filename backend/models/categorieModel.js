@@ -4,15 +4,10 @@ const mongoose = require('mongoose')
 const categoriesSchema = new mongoose.Schema(
     {
         Name: {type: String, required:true,unique: true},
-        Parent_Categorie: String,
+        Parent_Categorie:{type:String, default:'root'} ,
         Avatar: String,
         Description: String,
-        Status: {
-            type: String,
-            enum: [ 'published', 'inactive'],
-            required: false,
-            default: 'published'
-         }
+        Status: {type: Boolean,default: true}
     },
     {
         timestamps: true

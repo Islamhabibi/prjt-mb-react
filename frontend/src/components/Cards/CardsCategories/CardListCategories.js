@@ -1,20 +1,24 @@
 import { mdiDeleteAlert, mdiEyeSettings, mdiLeadPencil } from '@mdi/js'
 import Icon from '@mdi/react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { DeleteCategorie, GetCategories } from '../../Redux/Action/CategorieAction'
+import { DeleteCategorie, GetCategorie, GetCategories } from '../../Redux/Action/CategorieAction'
 import CardAddCategorie from './CardAddCategorie'
+import CardUpdateCategorie from './CardUpdateCategorie'
 
 function CardListCategories() {
+ 
     const dispatch = useDispatch()
   useEffect(()=>{
     dispatch(GetCategories())
+    
   },[])
   const userFormState = useSelector((state)=> state.categorie.categories)
   console.log(userFormState)
   return (
     < >
+    
          <div className="container-xxl flex-grow-1 container-p-y">
   {/* Users List Table */}
   <div className="card">
@@ -199,10 +203,11 @@ function CardListCategories() {
               
               <td className="sorting_1">
                 <div className="d-flex justify-content-start align-items-center user-name">
+                  {/**Avatar */}
                   <div className="avatar-wrapper">
                     <div className="avatar avatar-sm me-3">
                       <img
-                        src={e.Image_Categorie}
+                        src={e.Avatar}
                         alt="Avatar"
                         className="rounded-circle"
                       />
@@ -225,7 +230,7 @@ function CardListCategories() {
               
               
               <td>
-                {(e.isEnabled)?
+                {(e.Status)?
                 (<span
                   className="badge rounded-pill bg-label-success"
                   text-capitalized=""
@@ -243,8 +248,12 @@ function CardListCategories() {
               <td>
                 <div className="d-inline-block text-nowrap">
                 <span onClick={()=>dispatch(DeleteCategorie(e._id))}><Icon path={mdiDeleteAlert} size={1} /></span>
-                <span> <Icon path={mdiLeadPencil} size={1} /></span>
-                
+                <span>
+                  <Link to={`/settings-categ/${e._id}`}>
+                  <Icon  path={mdiLeadPencil} size={1} />
+                   </Link>
+                   
+                   </span>  
                 <Link to={`/settings/${e._id}`}><Icon path={mdiEyeSettings} size={1} /></Link>
 
                 </div>
@@ -266,7 +275,7 @@ function CardListCategories() {
     
   </div>
 </div>
-
+ 
     </>
   )
 }

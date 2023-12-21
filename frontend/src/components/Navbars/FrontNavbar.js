@@ -15,7 +15,7 @@ function FrontNavbar() {
     dispatch(getcurrent())
   },[])
   const user= useSelector(state=>state.team.user)
-  console.log(user)
+  //console.log(user)
   return (
     
      <nav

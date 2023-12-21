@@ -5,55 +5,48 @@ import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { AddCategorie } from '../../Redux/Action/CategorieAction';
+import axios from 'axios';
 
 function CardAddCategorie({data}) {
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [formData, setFormData] = useState({
-        Name: '',
-        Paraent_categorie: '',
-        Description: '',
-       
-
-    });
-
+     //les set des inputs
+    const [Name,setName]= useState('')
     const [Avatar,setAvatar] = useState([])
-    const [Parent_Categorie, setParent_Categorie] = useState('')
-    const [isEnabled, setIsEnabled] = useState('')
-    //console.log(isEnabled)
-   // console.log(formData)
-    const onChange = e => {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
-    }
+    const [Description, setDescription] = useState('')
+    const [Parent_Categorie, setParentCategorie] = useState('')
+    const [Status, setStatus] = useState('')
 
+    const handleChangeParentCatg = (e) => {
+        setParentCategorie(e.target.value);
+      };
+     
+      console.log({Name,Description,Parent_Categorie,Status})
     //function pour dispatche la fct dans l'actionteam
-    const Addcategory = () => {
+    const Addcategory = async () => {
         const formaData=new FormData()
         formaData.append('file',Avatar)
         formaData.append('upload_preset','ml_default')
-        if(Avatar.length===undefined){
-        await axios
-        .post('https://api.cloudinary.com/v1_1/dm5ktvety/upload',formaData)
-        .then(res=> 
-             dispatch
-              (UpdateUser(data._id,
-                {FullName,UserName,Email,Password,Phone,Profile,isEnabled,Avatar:res.data.url},navigate
-                )
-              )
-            
-            )
-            
-          }else{
+        if(Avatar.length===undefined){console.log({Name,Description,Parent_Categorie,Status})
+            await axios
+            .post('https://api.cloudinary.com/v1_1/dm5ktvety/upload',formaData)
+            .then(res=> 
                 dispatch
-                (UpdateUser(data._id,
-                    {FullName,UserName,Email,Password,Phone,Profile,isEnabled,Avatar:data.image}
+                (AddCategorie(
+                    {Name,Description,Parent_Categorie,Status,Avatar:res.data.url},navigate
+                    )
+                )
+                
+                )
+          }else{console.log({Name,Description,Parent_Categorie,Status})
+                dispatch
+                (AddCategorie(
+                    {Name,Description,Parent_Categorie,Status,Avatar:data.image},navigate
                     )
                 ); 
                 } 
-       
-        //console.log(formData)
+                console.log({Name,Description,Parent_Categorie,Status})
         handleClose()
     }
     const dispatch = useDispatch()
@@ -85,7 +78,7 @@ function CardAddCategorie({data}) {
                                 placeholder="ALIMENTAIRE"
                                 name="Name"
                                 aria-label="John Doe"
-                                onChange={onChange}
+                                onChange={(e) => setName(e.target.value)}
                             />
                             <label htmlFor="add-user-fullname">Name categorie</label>
                             <div className="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" />
@@ -111,6 +104,7 @@ function CardAddCategorie({data}) {
                                 rows={3}
                                 defaultValue={""}
                                 name="Description"
+                                onChange={(e) => setDescription(e.target.value)}
                             />
                             <label htmlFor="add-user-Username">Description</label>
                             <div className="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" />
@@ -121,11 +115,11 @@ function CardAddCategorie({data}) {
                                 className="select2 form-select"
                                 id="userRole"
                                 name="userRole"
-                                onChange={(e) => setParent_Categorie(e.target.value)}
+                                onChange={(e) => setParentCategorie(e.target.value)}
                             >
                                 <option value="">Select parent category</option>
                                 {
-                                    data?.map((e)=>(<option value={e.Name}>{e.Name}</option>))
+                                    data?.map((e)=>(<option onChange={handleChangeParentCatg} value={e.Name}>{e.Name}</option>))
                                 }
                                  
                             </select>
@@ -142,7 +136,7 @@ function CardAddCategorie({data}) {
                                     className="form-check-input"
                                     required=""
                                     //defaultChecked={(data.isEnabled)===true ? "Checked" : ""}
-                                    onChange={(e) => { setIsEnabled(true) }}
+                                    onChange={(e) => { setStatus(true) }}
                                 />
                                 <label class="form-check-label" for="active">Active</label>
                             </div>
@@ -155,7 +149,7 @@ function CardAddCategorie({data}) {
                                     value="inactive"
                                     required=""
                                     defaultChecked=""
-                                    onChange={(e) => { setIsEnabled(false) }}
+                                    onChange={(e) => { setStatus(false) }}
                                 />
                                 <label class="form-check-label" for="desactive">Desactive</label>
                             </div>

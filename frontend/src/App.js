@@ -21,6 +21,11 @@ import CardListCustomers from './components/Cards/CardListCustomers';
 import Index from './views/Index';
 import Dashboard from './views/admin';
 import CardListCategories from './components/Cards/CardsCategories/CardListCategories';
+import CardUpdateCategorie from './components/Cards/CardsCategories/CardUpdateCategorie';
+import Navbarverticl from './components/Navbars/navbarverticl';
+import Categories from './views/admin/Categories';
+import AdminNavbar from './components/Navbars/AdminNavbar';
+import Products from './views/admin/Products';
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -29,7 +34,7 @@ function App() {
     dispatch(getcurrent())
  },[])
    const user= useSelector(state=>state.team.user)
-   console.log(user.Profile)
+   //console.log(user.Profile)
   return (
     <>
     {/*<AdminNavbar/>
@@ -47,21 +52,33 @@ function App() {
     </>
     
     <Admin/>       user && (user.Profile === 'SuperAdmin' || user.Profile === 'Admin') && <Navbar />
+ <FrontNavbar/> <Navbarverticl/> <AdminNavbar/><Navbar/>
 */}
+
  
- <Navbar />
- <FrontNavbar/>
-    
+
+
+      <AdminNavbar/>
+      
       <Routes>
+       
+       {/* route Categories*/}
+       <Route path='/category-list' element={<CardListCategories/>}/>
+       <Route path='/settings-categ/:id' element={<CardUpdateCategorie/>}/>
+        {/* route Categories*/}
+        <Route path='/product-list' element={<Products/>}/>
+       {/* route Team*/}
        <Route path='/register' element={<Register />} />
        <Route path='/login' element={<Login />} />
-       <Route path='/listcategories' element={<CardListCategories/>}/>
-       <Route path='/listuseres' element={<CardListUseres/>}/>
-       <Route path='/settings/:id' element={<Settings/>}/>
-       <Route path='/profile/:id' element={<CardProfile/>}/>
+       <Route path='/Users' element={<CardListUseres/>}/>
+       <Route path='/settings-user/:id' element={<Settings/>}/>
+        {/* route Customers*/}
        <Route path='/registeruser' element={<Registercustomer/>}/>
        <Route path='/userlogin' element={<LoginCustomer/>}/>
-        <Route path='/listCustomers' element={<CardListCustomers/>}/>
+       <Route path='/customer-all' element={<CardListCustomers/>}/>
+       <Route path='/customer-details/:id' element={<CardProfile/>}/>
+       
+        {/* route site web  fronte*/}
         <Route path='/' element={<Index/>}/>
      </Routes>
       

@@ -27,7 +27,7 @@ function Login() {
     <div className="authentication-inner py-4">
       <div className="card p-2">
         <div className="app-brand justify-content-center mt-5">
-          <a href="index.html" className="app-brand-link gap-2">
+          <a href="#" className="app-brand-link gap-2">
           <img
               src= {logo}
               alt="auth-tree"

@@ -259,7 +259,7 @@ function CardListUseres() {
                 <span onClick={()=>dispatch(DeleteUser(e._id))}><Icon path={mdiDeleteAlert} size={1} /></span>
                 <span> <Icon path={mdiLeadPencil} size={1} /></span>
                 
-                <Link to={`/settings/${e._id}`}><Icon path={mdiEyeSettings} size={1} /></Link>
+                <Link to={`/settings-user/${e._id}`}><Icon path={mdiEyeSettings} size={1} /></Link>
 
                 </div>
                </td> 

@@ -26,7 +26,7 @@ function LoginCustomer() {
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
-  console.log(formData)
+  //console.log(formData)
   //function pour dispatche la fct dans l'actionteam
   const loginUser = () => {
     dispatch(LoginUser(formData,navigate))

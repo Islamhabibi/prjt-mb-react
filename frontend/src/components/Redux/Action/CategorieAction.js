@@ -1,16 +1,29 @@
 import axios  from "axios";
-import { ADDCATEGORIE, GETCATEGORIE } from "../Actiontype/CategorieActionType";
+import { ADDCATEGORIE, GETCATEGORIE, ONECATEGORIE } from "../Actiontype/CategorieActionType";
 export const GetCategories=() => async(dispatch) =>
 {
     try {
         const res= await axios
             .get('/categories/all')
             .then((res)=>dispatch({type:GETCATEGORIE,payload:res.data.AllCategories}))
-            console.log(res.data)
+            //console.log(res.data)
     } catch (error) {
         console.log(error)
     }
 }
+
+export const GetCategorie=(id) => async(dispatch) =>
+{
+    try {
+        const res= await axios
+            .get('/categories/detailcatg/'+id)
+            .then((res)=>dispatch({type:ONECATEGORIE,payload:res.data.OneCategorie}))
+           // console.log(res)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const AddCategorie=(data,navigate) => async (dispatch) =>
 {
     try {
@@ -31,4 +44,16 @@ export const DeleteCategorie =(id) => async(dispatch) =>
       } catch (error) {
         console.log(error);
       }
+}
+
+export const Updatecategorie =(id,data,navigate) => async (dispatch) =>
+{
+    try {
+        const res = await axios
+            .put('/categories/updatecatg/'+id,data)
+            .then((res)=>dispatch(GetCategorie(id)))
+            navigate('/listcategories')
+    } catch (error) {
+        console.log(error);
+    }
 }

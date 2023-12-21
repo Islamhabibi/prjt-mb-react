@@ -188,41 +188,11 @@ function CardListCustomers() {
               <span onClick={()=>dispatch(DeleteUser(e._id))}><Icon path={mdiDeleteAlert} size={1} /></span>
              
               
-              <Link to={`/settings/${e._id}`}><Icon path={mdiEyeSettings} size={1} /></Link>
+              <Link to={`/profile/${e._id}`}><Icon path={mdiEyeSettings} size={1} /></Link>
 
               </div>
              </td> 
-            {/* 
-            <td>
-              <div className="d-inline-block text-nowrap">
-                <button
-                  className="btn btn-sm btn-icon btn-text-secondary rounded-pill btn-icon dropdown-toggle hide-arrow"
-                  data-bs-toggle="dropdown"
-                >
-                  <i className="mdi mdi-dots-vertical mdi-20px" />
-                </button>
-                <div className="dropdown-menu dropdown-menu-end m-0">
-                  <a
-                    href="app-user-view-account.html"
-                    className="dropdown-item"
-                  >
-                    <i className="mdi mdi-eye-outline me-2" />
-                    <span>View</span>
-                  </a>
-                  <a href="javascript:;" className="dropdown-item">
-                    <i className="mdi mdi-pencil-outline me-2" />
-                    <span><Settings data={e}/> Edit</span>
-                  </a>
-                  <a
-                    href="javascript:;"
-                    className="dropdown-item delete-record"
-                  >
-                    <i className="mdi mdi-delete-outline me-2" />
-                    <span>Delete</span>
-                  </a>
-                </div>
-              </div>
-            </td>*/}
+            
           </tr>
             ))
           }

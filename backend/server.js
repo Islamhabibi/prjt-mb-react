@@ -6,6 +6,7 @@ const connectDB = require('./db/DB');
 const categorieRoute = require('./routes/categorieRoutes');
 const teamRoute = require('./routes/teamRoutes');
 const customerRoute = require('./routes/CustomerRoutes');
+const productRoute = require('./routes/productRoutes');
 const port = process.env.PORT || 5000
 
 //init app   
@@ -19,4 +20,5 @@ connectDB()
 app.use('/categories',categorieRoute) 
 app.use('/team',teamRoute)  
 app.use('/customer',customerRoute)
-app.listen(port,console.log(`server is runing at http://192.168.3.63:${port}`)) 
+app.use('/product',productRoute)
+app.listen(port,console.log(`server is runing at http://localhost:${port}`)) 

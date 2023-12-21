@@ -20,6 +20,10 @@ exports.loginvalidation= [
     body("email","email is note valide").isEmail(),
     body("password","minimum length 8 cara").isLength({min:7})
 ]
+exports.productvalidation= [
+    body("Name","You have to put the name of product").notEmpty(),
+    body("Name","minimum length 8 cara").isLength({min:8})
+]
 exports.validation = (req,res,next)=>{
     const error = validationResult(req)
     if (!error.isEmpty()){
