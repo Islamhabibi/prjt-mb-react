@@ -18,7 +18,7 @@ export const GetUsersTeam=() => async(dispatch) =>
         const res= await axios
             .get('/team/all')
             .then((res)=>dispatch({type:ALLTEAM,payload:res.data.AllUsers}))
-            console.log(res.data)
+            //console.log(res.data)
     } catch (error) {
         console.log(error)
     }

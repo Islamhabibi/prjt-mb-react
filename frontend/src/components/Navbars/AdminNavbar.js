@@ -19,6 +19,7 @@ const AdminNavbar = () => {
   return (<>
     <nav className="navbar navbar-expand-lg navbar-light p-3 border-bottom">
       <div className="container">
+        <div className='col-2'>
         <Link to="/" className="navbar-brand">
         <img
               src= {logo}
@@ -37,7 +38,8 @@ const AdminNavbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-
+        </div>
+        <div className='col-8'>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
           {user.FullName? 
@@ -45,6 +47,11 @@ const AdminNavbar = () => {
               <li className="nav-item">
                   <Link className="nav-link menu-link  " to={'/category-list'} >
                     All Categorys  
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link menu-link  " to={'/product-list'} >
+                    All Products  
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -114,6 +121,7 @@ const AdminNavbar = () => {
             
           
           </ul>
+        </div>
         </div>
       </div>
     </nav>

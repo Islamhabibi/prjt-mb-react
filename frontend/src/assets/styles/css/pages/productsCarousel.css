@@ -11356,8 +11356,8 @@ textarea.form-control-lg {
 }
 @media (min-width: 992px) {
   .navbar-brand {
-    position: absolute;
-    left: 50%;
+    position: relative;
+    
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
   }

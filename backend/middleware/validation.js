@@ -22,7 +22,7 @@ exports.loginvalidation= [
 ]
 exports.productvalidation= [
     body("Name","You have to put the name of product").notEmpty(),
-    body("Name","minimum length 8 cara").isLength({min:8})
+    body("Name","minimum length 4 cara").isLength({min:4})
 ]
 exports.validation = (req,res,next)=>{
     const error = validationResult(req)

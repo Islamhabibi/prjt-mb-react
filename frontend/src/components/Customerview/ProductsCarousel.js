@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../assets/styles/css/pages/productsCarousel.css'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { GetAllProducts } from '../Redux/Action/ProductAction';
+
+
 const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -26,6 +30,14 @@ const responsive = {
     }
   };
 function ProductsCarousel() {
+  
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(GetAllProducts())
+  },[])
+  const userFormState = useSelector((state)=> state.product.products)
+  
+  console.log(userFormState)
   return (
      <>
         <section className="py-5">
@@ -45,225 +57,68 @@ function ProductsCarousel() {
         
       >
         
-        <Carousel 
-            
+        <Carousel             
             draggable={false}
             showDots={true}
             responsive={responsive}
             autoPlaySpeed={1000}
             keyBoardControl={true}
-            
-            transitionDuration={500}
-          
-            
-            
-        >
-            <div><div
-          className="swiper-slide pb-5 swiper-slide-duplicate"
-          data-swiper-slide-index={4}
-          role="group"
-          aria-label="5 / 9"
-          style={{ width: "237.6px", marginRight: 25 }}
-        >
-          <div className="product mb-4">
-            <span className="badge rounded-0 bg-" />
-            <a href="detail.html">
-              <img
-                className="img-fluid"
-                src="https://d19m59y37dris4.cloudfront.net/shopio/1-1/img/product-5.5d8c02c5.jpg"
-                alt="Kui Ye Chen’s AirPods"
-              />
-            </a>
-            <div className="cta shadow d-inline-block">
-              <a className="product-btn" href="#">
-                <i className="fas fa-heart" />
-              </a>
-              <a
-                className="product-btn"
-                href="#productView"
-                data-bs-toggle="modal"
-              >
-                <i className="fas fa-expand" />
-              </a>
-              <a className="product-btn" href="cart.html">
-                <i className="fas fa-dolly-flatbed" />
-              </a>
-            </div>
-          </div>
-          <h6 className="text-center">
-            <a className="reset-anchor" href="detail.html">
-              Kui Ye Chen’s AirPods
-            </a>
-          </h6>
-          <p className="text-center text-muted font-weight-bold">$22.00</p>
-        </div></div>
-            <div><div
-          className="swiper-slide pb-5 swiper-slide-duplicate"
-          data-swiper-slide-index={4}
-          role="group"
-          aria-label="5 / 9"
-          style={{ width: "237.6px", marginRight: 25 }}
-        >
-          <div className="product mb-4">
-            <span className="badge rounded-0 bg-" />
-            <a href="detail.html">
-              <img
-                className="img-fluid"
-                src="https://d19m59y37dris4.cloudfront.net/shopio/1-1/img/product-5.5d8c02c5.jpg"
-                alt="Kui Ye Chen’s AirPods"
-              />
-            </a>
-            <div className="cta shadow d-inline-block">
-              <a className="product-btn" href="#">
-                <i className="fas fa-heart" />
-              </a>
-              <a
-                className="product-btn"
-                href="#productView"
-                data-bs-toggle="modal"
-              >
-                <i className="fas fa-expand" />
-              </a>
-              <a className="product-btn" href="cart.html">
-                <i className="fas fa-dolly-flatbed" />
-              </a>
-            </div>
-          </div>
-          <h6 className="text-center">
-            <a className="reset-anchor" href="detail.html">
-              Kui Ye Chen’s AirPods
-            </a>
-          </h6>
-          <p className="text-center text-muted font-weight-bold">$22.00</p>
-        </div></div>
-        {/** */}
-        <div>
-                <div
-          className="swiper-slide pb-5 swiper-slide-duplicate"
-          data-swiper-slide-index={4}
-          role="group"
-          aria-label="5 / 9"
-          style={{ width: "237.6px", marginRight: 25 }}
-        >
-          <div className="product mb-4">
-            <span className="badge rounded-0 bg-" />
-            <a href="detail.html">
-              <img
-                className="img-fluid"
-                src="https://d19m59y37dris4.cloudfront.net/shopio/1-1/img/product-5.5d8c02c5.jpg"
-                alt="Kui Ye Chen’s AirPods"
-              />
-            </a>
-            <div className="cta shadow d-inline-block">
-              <a className="product-btn" href="#">
-                <i className="fas fa-heart" />
-              </a>
-              <a
-                className="product-btn"
-                href="#productView"
-                data-bs-toggle="modal"
-              >
-                <i className="fas fa-expand" />
-              </a>
-              <a className="product-btn" href="cart.html">
-                <i className="fas fa-dolly-flatbed" />
-              </a>
-            </div>
-          </div>
-          <h6 className="text-center">
-            <a className="reset-anchor" href="detail.html">
-              Kui Ye Chen’s AirPods
-            </a>
-          </h6>
-          <p className="text-center text-muted font-weight-bold">$22.00</p>
-        </div></div>
-        {/** */}
+            transitionDuration={500}            
+        >  
+          {userFormState?.map((e)=>(
             <div>
-                <div
-          className="swiper-slide pb-5 swiper-slide-duplicate"
-          data-swiper-slide-index={4}
-          role="group"
-          aria-label="5 / 9"
-          style={{ width: "237.6px", marginRight: 25 }}
-        >
-          <div className="product mb-4">
-            <span className="badge rounded-0 bg-" />
-            <a href="detail.html">
-              <img
-                className="img-fluid"
-                src="https://d19m59y37dris4.cloudfront.net/shopio/1-1/img/product-5.5d8c02c5.jpg"
-                alt="Kui Ye Chen’s AirPods"
-              />
-            </a>
-            <div className="cta shadow d-inline-block">
-              <a className="product-btn" href="#">
-                <i className="fas fa-heart" />
+            <div
+              className="swiper-slide pb-5 swiper-slide-duplicate"
+              data-swiper-slide-index={4}
+              role="group"
+              aria-label="5 / 9"
+              style={{ width: "237.6px", marginRight: 25 }}
+            >
+              <div className="product mb-4">
+              <span className="badge rounded-0 bg-" />
+              <a href="detail.html">
+                <img
+                  className="img-fluid"
+                  src={e.Avatar}
+                  alt="Kui Ye Chen’s AirPods"
+                />
               </a>
-              <a
-                className="product-btn"
-                href="#productView"
-                data-bs-toggle="modal"
-              >
-                <i className="fas fa-expand" />
-              </a>
-              <a className="product-btn" href="cart.html">
-                <i className="fas fa-dolly-flatbed" />
-              </a>
-            </div>
+              <div className="cta shadow d-inline-block">
+                <a className="product-btn" href="#">
+                  <i className="fas fa-heart" />
+                </a>
+                <a
+                  className="product-btn"
+                  href="#productView"
+                  data-bs-toggle="modal"
+                >
+                  <i className="fas fa-expand" />
+                </a>
+                <a className="product-btn" href="cart.html">
+                  <i className="fas fa-dolly-flatbed" />
+                </a>
+              </div>
           </div>
           <h6 className="text-center">
             <a className="reset-anchor" href="detail.html">
-              Kui Ye Chen’s AirPods
+            {e.Name}
             </a>
           </h6>
-          <p className="text-center text-muted font-weight-bold">$22.00</p>
-        </div></div>
-            <div><div
-          className="swiper-slide pb-5 swiper-slide-duplicate"
-          data-swiper-slide-index={4}
-          role="group"
-          aria-label="5 / 9"
-          style={{ width: "237.6px", marginRight: 25 }}
-        >
-          <div className="product mb-4">
-            <span className="badge rounded-0 bg-" />
-            <a href="detail.html">
-              <img
-                className="img-fluid"
-                src="https://d19m59y37dris4.cloudfront.net/shopio/1-1/img/product-5.5d8c02c5.jpg"
-                alt="Kui Ye Chen’s AirPods"
-              />
-            </a>
-            <div className="cta shadow d-inline-block">
-              <a className="product-btn" href="#">
-                <i className="fas fa-heart" />
-              </a>
-              <a
-                className="product-btn"
-                href="#productView"
-                data-bs-toggle="modal"
-              >
-                <i className="fas fa-expand" />
-              </a>
-              <a className="product-btn" href="cart.html">
-                <i className="fas fa-dolly-flatbed" />
-              </a>
-            </div>
-          </div>
-          <h6 className="text-center">
-            <a className="reset-anchor" href="detail.html">
-              Kui Ye Chen’s AirPods
-            </a>
-          </h6>
-          <p className="text-center text-muted font-weight-bold">$22.00</p>
-        </div></div>
+          <p className="text-center text-muted font-weight-bold">${e.Price}</p>
+        </div>
+      </div>
+          ))}
+          
+          
+         
         </Carousel>;
           
-     
+       
       </div>
     </div>
   </div>
 </section>
+
 
      </>
   

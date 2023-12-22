@@ -30,7 +30,7 @@ export const AddCategorie=(data,navigate) => async (dispatch) =>
         const res = await axios
             .post('/categories/addcategorie',data)//team (dans le server)/ dans le teamRoutes
             .then((res) => (GetCategories()));
-            navigate('/listcategories')
+            navigate('/category-list')
     } catch (error) {
         console.log(error)
     }
@@ -52,7 +52,7 @@ export const Updatecategorie =(id,data,navigate) => async (dispatch) =>
         const res = await axios
             .put('/categories/updatecatg/'+id,data)
             .then((res)=>dispatch(GetCategorie(id)))
-            navigate('/listcategories')
+            navigate('/category-list')
     } catch (error) {
         console.log(error);
     }

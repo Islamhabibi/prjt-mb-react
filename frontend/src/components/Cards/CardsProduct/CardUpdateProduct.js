@@ -3,46 +3,56 @@ import 'quill/dist/quill.snow.css'; // pour importer le style de Quill
 import ReactQuill, { quillEditor } from 'react-quill';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetCategories } from '../../Redux/Action/CategorieAction';
-import { AddProduct, Addproduct2 } from '../../Redux/Action/ProductAction';
+import {  FindProduct, UpdateProduct } from '../../Redux/Action/ProductAction';
 import axios from 'axios';
-import { useNavigate } from 'react-router';
-function CardAddProduct() {    
-    const [Name,setName]= useState('')
-    const [Description, setDescription] = useState('');
-    const [Avatar,setAvatar]= useState([])
-    const [Price, setPrice] =useState(0)
-    const [QtStock, setQtStock] = useState(1)
-    const [idCategorie,setIdCategorie]= useState('')    
-    const [Status, setStatus] = useState(true)
-    
-    const dispatch = useDispatch()
+import { useNavigate, useParams } from 'react-router';
+function CardUpdateProduct() {    
+    const idptd= useParams()
+    const dispatch = useDispatch();
+  //console.log(idptd.id)
+    useEffect(()=>{
+        dispatch(FindProduct(idptd.id))
+        dispatch(GetCategories())
+    },[])
+     const data= useSelector((state)=> state.product.product)
+      const listctg = useSelector((state)=> state.categorie.categories)
+        console.log(listctg)
+      const [Name,setName]= useState(data.Name)
+      const [Description, setDescription] = useState(data.Description);
+      const [Avatar,setAvatar]= useState(data.Avatar)
+      const [Price, setPrice] =useState(data.Price)
+      const [QtStock, setQtStock] = useState(data.QtStock)
+      const [idCategorie,setIdCategorie]= useState(data.idCategorie)    
+      const [Status, setStatus] = useState(data.Status)
     const navigate = useNavigate()
     
-     
+    const handleChange = (value) => {
+        setDescription(value);
+    };  
     
-     //recupere list des categ
-    useEffect(()=>{
-      dispatch(GetCategories())
-    },[])
-    const listctg = useSelector((state)=> state.categorie.categories)
-   
-    //fin fct
-    ///console.log({Name,description,Price,QtStock,idCategorie,Status,Avatar})
-    const Addprod= async ()=>{ 
+    
+    const Updateprod= async ()=>{ 
       const formaData=new FormData()
       formaData.append('file',Avatar)
       formaData.append('upload_preset','ml_default')
-      if(Avatar.length===undefined){
+      if(!Avatar?.length){
         await axios
         .post('https://api.cloudinary.com/v1_1/dm5ktvety/upload',formaData)
         .then(
           (res)=>
             {dispatch
-              (AddProduct(
-                {Name,Description,Price,QtStock,idCategorie,Status,Avatar:res.data.url}
-                ,navigate)
-              );  console.log({Name,Description,Price,QtStock,idCategorie,Status,Avatar})
+              (UpdateProduct(data._id,
+                {Name,Description,Price,QtStock,idCategorie,Status,Avatar:res.data.url},navigate
+                )
+              );   
             }
+            )
+          }else { 
+            dispatch
+            (
+                UpdateProduct(data._id,
+                    {Name,Description,Price,QtStock,idCategorie,Status,Avatar:data.Avatar},navigate
+                    ) 
             )
           }
     }
@@ -52,7 +62,7 @@ function CardAddProduct() {
   {/* Add Product */}
   <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
     <div className="d-flex flex-column justify-content-center">
-      <h4 className="mb-1 mt-3">Add a new Product</h4>
+      <h4 className="mb-1 mt-3">Update Product</h4>
       
     </div>
     <div className="d-flex align-content-center flex-wrap gap-3">
@@ -61,17 +71,17 @@ function CardAddProduct() {
       </button>
       <button className="btn btn-outline-primary waves-effect"
         onChange={(e) => { setStatus(false) }}
-        onClick={Addprod}
+        onClick={Updateprod}
       >
-        Save draft
+        Update And draft
       </button>
       <button
         type="submit"
         className="btn btn-primary waves-effect waves-light"
         onChange={(e) => { setStatus(true) }}
-        onClick={Addprod}
+        onClick={Updateprod}
       >
-        Publish product
+       Update And Publish product
       </button>
     </div>
   </div>
@@ -93,6 +103,7 @@ function CardAddProduct() {
               placeholder="Product title"
               name="productTitle"
               aria-label="Product title"
+              defaultValue={data.Name}
               onChange={(e) => setName(e.target.value)}
             />
             <label htmlFor="ecommerce-product-name">Name</label>
@@ -103,13 +114,24 @@ function CardAddProduct() {
             <label className="form-label">
               Description <span className="text-muted">(Optional)</span>
             </label>
-            <textarea
+            
+            {/*<textarea
               className="form-control"
               id="exampleFormControlTextarea1"
               rows={3}
-              defaultValue={""}
+              
+              value={data.Description}             
               name="Description"
-              onChange={(e) => setDescription(e.target.value)}
+              defaultValue={data.Description}
+              onChange={handleChange}
+            />*/}
+            <textarea
+                className="form-control"
+                id="exampleFormControlTextarea1"
+                rows={3}
+                defaultValue={data.Description}
+                name="Description"
+                onChange={handleChange}
             />
             
           </div>
@@ -122,9 +144,18 @@ function CardAddProduct() {
           <h5 className="mb-0 card-title">Media</h5>
           
         </div>
-        <div className="card-body">
-          
-            <div className="dz-message needsclick my-5">
+        <div className="card-body row">
+         
+        <div className="form-floating form-floating-outline mb-4 col-6 col-lg-4 col-sm-12">
+            <img      width={200}
+                      height={290}
+                      src={data.Avatar}
+                      alt="product-avatar"
+                      className="d-block  rounded"
+                      id="uploadedAvatar"
+                    />
+            </div>
+            <div className="dz-message needsclick my-5 col-6 col-lg-6 col-sm-12">
               Drop your image here
               <small className="text-muted d-block fs-6 my-2">or</small>
               <input 
@@ -133,7 +164,7 @@ function CardAddProduct() {
                 onChange={(e) => setAvatar(e.target.files[0])}
               />
             </div>
-          
+           
         </div>
       </div>
       {/* /Media */}
@@ -160,57 +191,11 @@ function CardAddProduct() {
               placeholder="Price"
               name="productPrice"
               aria-label="Product price"
+              defaultValue={data.Price}
               onChange={(e)=>setPrice(e.target.value)}
             />
             <label htmlFor="ecommerce-product-price">Best Price</label>
           </div>
-          {/* Discounted Price 
-          <div className="form-floating form-floating-outline mb-4">
-            <input
-              type="number"
-              min="10"
-              step="any"
-              className="form-control"
-              id="ecommerce-product-discount-price"
-              placeholder="Discounted Price"
-              name="productDiscountedPrice"
-              aria-label="Product discounted price"
-            />
-            <label htmlFor="ecommerce-product-discount-price">
-              Discounted Price
-            </label>
-          </div>*/}
-          {/* Charge tax check box 
-          <div className="form-check mb-2">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              defaultValue=""
-              id="price-charge-tax"
-              defaultChecked=""
-            />
-            <label className="form-label" htmlFor="price-charge-tax">
-              Charge tax on this product
-            </label>
-          </div>*/}
-          {/* Instock switch
-           <div className="d-flex justify-content-between align-items-center border-top pt-3">
-            <p className="mb-0">In stock</p>
-            <div className="w-25 d-flex justify-content-end">
-              <label className="switch switch-primary  me-4 pe-2">
-                <input
-                  type="checkbox"
-                  className="switch-input"
-                  defaultChecked=""
-                />
-                <span className="switch-toggle-slider">
-                  <span className="switch-on">
-                    <span className="switch-off" />
-                  </span>
-                </span>
-              </label>
-            </div>
-          </div> */}
          
         </div>
       </div>
@@ -237,16 +222,17 @@ function CardAddProduct() {
                   aria-hidden="true"
                   onChange={(e) => setIdCategorie(e.target.value)}
                 >
-                  <option value="" data-select2-id={10}>
-                    Select Category
+                  
+                  <option value={data.idCategorie} >
+                  {data.idCategorie}
                   </option>
                   {
                     listctg?.map(
-                      (e)=>(<option 
-                        
+                      (e)=>( (data.idCategorie!== e.Name) && data.idCategorie!== e.Name?
+                      <option 
                         value={e.Name} key={e.Name}>
                           {e.Name} 
-                        </option>)
+                        </option>:null)
                     )
                   }
                    
@@ -286,7 +272,7 @@ function CardAddProduct() {
                   <span className="dropdown-wrapper" aria-hidden="true" />
                 </span>
               
-              <label htmlFor="collection">Collection</label>
+              <label htmlFor="collection">Category</label>
             </div>
           </div>
         </div>
@@ -310,6 +296,7 @@ function CardAddProduct() {
                 placeholder="QTY"
                 name="QtyPrice"
                 aria-label="Product Qty"
+                defaultValue={data.QtStock}
                  onChange={(e)=>{setQtStock(e.target.value)}}
               /> 
               <label htmlFor="status-org">QTY</label>
@@ -368,6 +355,53 @@ function CardAddProduct() {
             </div>
             
           </div>*/}
+             {/* Discounted Price 
+          <div className="form-floating form-floating-outline mb-4">
+            <input
+              type="number"
+              min="10"
+              step="any"
+              className="form-control"
+              id="ecommerce-product-discount-price"
+              placeholder="Discounted Price"
+              name="productDiscountedPrice"
+              aria-label="Product discounted price"
+            />
+            <label htmlFor="ecommerce-product-discount-price">
+              Discounted Price
+            </label>
+          </div>*/}
+          {/* Charge tax check box 
+          <div className="form-check mb-2">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              defaultValue=""
+              id="price-charge-tax"
+              defaultChecked=""
+            />
+            <label className="form-label" htmlFor="price-charge-tax">
+              Charge tax on this product
+            </label>
+          </div>*/}
+          {/* Instock switch
+           <div className="d-flex justify-content-between align-items-center border-top pt-3">
+            <p className="mb-0">In stock</p>
+            <div className="w-25 d-flex justify-content-end">
+              <label className="switch switch-primary  me-4 pe-2">
+                <input
+                  type="checkbox"
+                  className="switch-input"
+                  defaultChecked=""
+                />
+                <span className="switch-toggle-slider">
+                  <span className="switch-on">
+                    <span className="switch-off" />
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div> */}
           </div>
           </div>
     </div>
@@ -379,4 +413,7 @@ function CardAddProduct() {
   )
 }
 
-export default CardAddProduct
+export default CardUpdateProduct
+
+
+ 

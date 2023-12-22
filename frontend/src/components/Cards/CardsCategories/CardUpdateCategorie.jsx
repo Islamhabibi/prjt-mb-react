@@ -37,7 +37,7 @@ function CardUpdateCategorie() {
       const formaData=new FormData()
       formaData.append('file',Avatar)
       formaData.append('upload_preset','ml_default')
-      if(Avatar.length===undefined){
+      if(Avatar?.length===undefined){
       await axios
       .post('https://api.cloudinary.com/v1_1/dm5ktvety/upload',formaData)
       .then(res=> 
@@ -46,13 +46,14 @@ function CardUpdateCategorie() {
               {Name,Description,Parent_Categorie,Status,Avatar:res.data.url},navigate
               )
             )
-          
-          )
-          console.log( {Name,Description,Parent_Categorie,Status,Avatar})
+            
+          ) 
+          console.log(formaData)
+         
         }else{
               dispatch
               (Updatecategorie(data._id,
-                  {Name,Description,Parent_Categorie,StatusAvatar:data.image},navigate
+                  {Name,Description,Parent_Categorie,StatusAvatar:data.Avatar},navigate
                   )
               );  console.log( {Name,Description,Parent_Categorie,Status,Avatar})
               }
@@ -115,8 +116,7 @@ function CardUpdateCategorie() {
                         <textarea
                                 className="form-control"
                                 id="exampleFormControlTextarea1"
-                                rows={10}
-                                defaultValue={""}
+                                rows={10}  
                                 name="Description"
                                 defaultValue={data.Description}
                                 onChange={(e) => setDescription(e.target.value)}

@@ -26,6 +26,11 @@ import Navbarverticl from './components/Navbars/navbarverticl';
 import Categories from './views/admin/Categories';
 import AdminNavbar from './components/Navbars/AdminNavbar';
 import Products from './views/admin/Products';
+import CardsListProduct from './components/Cards/CardsProduct/CardsListProduct';
+import CardUpdateProduct from './components/Cards/CardsProduct/CardUpdateProduct';
+import UpdatPro from './views/admin/updatPro';
+import ContactUS from './components/Customerview/ContactUS';
+import Cart from './components/Customerview/Cart';
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -66,7 +71,9 @@ function App() {
        <Route path='/category-list' element={<CardListCategories/>}/>
        <Route path='/settings-categ/:id' element={<CardUpdateCategorie/>}/>
         {/* route Categories*/}
-        <Route path='/product-list' element={<Products/>}/>
+        <Route path='/product-list' element={<CardsListProduct/>}/>
+        <Route path='/Add-product' element={<Products/>}/>
+        <Route path='/settings-prouct/:id' element={<UpdatPro/>}/>
        {/* route Team*/}
        <Route path='/register' element={<Register />} />
        <Route path='/login' element={<Login />} />
@@ -80,6 +87,8 @@ function App() {
        
         {/* route site web  fronte*/}
         <Route path='/' element={<Index/>}/>
+        <Route path='/cart' element={<Cart/>}/>
+        <Route path='/contact-us' element={<ContactUS/>}/>
      </Routes>
       
       

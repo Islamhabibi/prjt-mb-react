@@ -11,8 +11,19 @@ exports.getProduct=async(req,res)=>{
             .send({message:"erreur"})
     }
 }
-
-exports.AddProduct= async(req,res) =>{
+//get prod selon la categorie 
+exports.getProductCateg = async (req,res)=>{
+  try {
+    const ProductCatg = await products.find({ idCategorie: "Droguerie" })
+      res.status(200)
+        .send({message:'ok',ProductCatg})
+        console.log(ProductCatg)
+  } catch (error) {
+    res.status(500)
+            .send({message:"erreur"})
+  }
+}
+/*exports.AddProduct= async(req,res) =>{
     try {
         const product = new products(req.body)
         await product.save()
@@ -22,7 +33,49 @@ exports.AddProduct= async(req,res) =>{
         res.status(500)
         .send({message:"erreur"})
     }
-}
+}*/
+exports.AddProduct = async (req, res) => {
+    try {
+      const { Name } = req.body;
+  
+      // Check if product exists
+      const prodExists = await products.findOne({ Name });
+  
+      if (prodExists) {
+        return res.status(400).json({
+          message: "Product already exists",
+          prodExists,
+        });
+      }
+  
+      // Create product
+      const product = await products.create(req.body);
+  
+      if (product) {
+        console.log(product);
+        return res.status(200).json({
+          _id: product.id,
+          Name: product.Name,
+          Description: product.Description,
+          Avatar: product.Avatar,
+          Price: product.Price,
+          QtStock: product.QtStock,  
+          idCategorie: product.idCategorie,
+          Status: product.Status,
+        });
+      } else {
+        return res.status(400).json({
+          message: "Invalid product data",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        message: "Internal Server Error",
+      });
+    }
+  };
+  
 exports.DeletProduct = async(req,res) =>{
     try {
         const product = await products.findByIdAndDelete(req.params.id)
