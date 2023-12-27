@@ -4,127 +4,49 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { getcurrent, logout } from '../Redux/Action/TeamAction'  
 import logo from "../../assets/img/logo/mb-mt.png"   
-
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import { mdiBasket } from '@mdi/js';
+import Icon from '@mdi/react';
 const AdminNavbar = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-   
- useEffect(()=>{
-  //getcurrent
-  dispatch(getcurrent()) 
- },[])
- const user= useSelector(state=>state.team.user)
-   
-
-  return (<>
-    <nav className="navbar navbar-expand-lg navbar-light p-3 border-bottom">
-      <div className="container">
-        <div className='col-2'>
-        <Link to="/" className="navbar-brand">
-        <img
-              src= {logo}
-              alt="auth-tree"
-              className="app-brand-logo demo"
-            /> 
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        </div>
-        <div className='col-8'>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto">
-          {user.FullName? 
-                  <>
-              <li className="nav-item">
-                  <Link className="nav-link menu-link  " to={'/category-list'} >
-                    All Categorys  
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link menu-link  " to={'/product-list'} >
-                    All Products  
-                  </Link>
-                </li>
-                <li className="nav-item">
-                <Link className="nav-link menu-link  " to={'/customer-all'} >
-                  All Customers
-                </Link>
-                </li>
-                <li className="nav-item">
-                <Link className="nav-link menu-link  " to={'/Users'} >
-                  Teams
-                </Link>
-                </li>
-                <li>
-                <div className="navbar-nav align-items-center">
-                  <div className="nav-item d-flex align-items-center">
-                    <i className="mdi mdi-magnify mdi-24px lh-0" />
-                    <input
-                      type="text"
-                      className="form-control border-0 shadow-none bg-body"
-                      placeholder="Search..."
-                      aria-label="Search..."
-                    />
-                  </div>
-                </div>
-                </li>
-                <li className="nav-item navbar-dropdown dropdown-user dropdown">
-                    <a
-                      className="nav-link dropdown-toggle hide-arrow p-0"
-                      href="javascript:void(0);"
-                      data-bs-toggle="dropdown"
-                    ><Link to={`/settings-user/${user._id}`}>
-                      <div className="avatar avatar-online">
-                        
-                        <img
-                          src={user.Avatar}
-                          alt=""
-                          className="w-px-40 h-auto rounded-circle"
-                        />
-                        
-                      </div></Link>
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" to={'/login'} onClick={()=>dispatch(logout(navigate))}>
-                        Logout
-                    </Link>
-                  </li>
-                </> 
-                :null}    
-                {!user?.FullName?
-                <>
-                  <li className="nav-item">
-                    <Link className="nav-link" to={'/register'}>
-                        Register
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" to={'/login'}>
-                        Login
-                    </Link>
-                    </li>
-                </>:null
-                }
-                   
-                  
-               
+  const basket = useSelector(state=>state.product.basket)
+  
+  return (
+  <>
+     <Navbar collapseOnSelect expand="lg" className="" >
+      <Container>
+        <Navbar.Brand href="/"> <img src= {logo}/></Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto" >
+            <Nav.Link href="/">Home</Nav.Link>
+            <NavDropdown title="Hygiene products" id="collapsible-nav-dropdown" >
+              <NavDropdown.Item href={`/cart/General hygiene`}>General hygiene</NavDropdown.Item>
+              <NavDropdown.Item href={`/cart/Droguerie`}>Droguerie </NavDropdown.Item>
+              
+            </NavDropdown>
+            <NavDropdown title="Bags & Collections" id="collapsible-nav-dropdown">
+              <NavDropdown.Item  href={`/cart/Poubel  Bags`}>Poubel  Bags</NavDropdown.Item>
+              <NavDropdown.Item  href={`/cart/Trash`}>Trash</NavDropdown.Item>
+            </NavDropdown>
+            <Nav.Link  href={`/cart/Wiping Paper`}>Wiping Paper</Nav.Link>
+            <Nav.Link  href={`/cart/Brush`}>Brush</Nav.Link>
+            <Nav.Link href="/contact-us">Contact us</Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link href="#deets">Login</Nav.Link>
             
-          
-          </ul>
-        </div>
-        </div>
-      </div>
-    </nav>
+            <Link className="nav-link" to={'/basket'}>
+              <Icon path={mdiBasket} size={1} />{basket.length}
+            </Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
     </>
   );
 };

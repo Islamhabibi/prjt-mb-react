@@ -13,11 +13,22 @@ exports.getProduct=async(req,res)=>{
 }
 //get prod selon la categorie 
 exports.getProductCateg = async (req,res)=>{
+  
   try {
-    const ProductCatg = await products.find({ idCategorie: "Droguerie" })
-      res.status(200)
+    const ProductCatg = await products.find({ idCategorie: req.params.name })
+    const productCount = await products.countDocuments({ idCategorie: req.params.name });
+    if (ProductCatg) {
+      // if (req.body) {
+           
+           
+           res.status(200)
         .send({message:'ok',ProductCatg})
         console.log(ProductCatg)
+    }else{
+      res.status(200)
+        .send({message:'Aucun produits',ProductCatg})
+    }
+      
   } catch (error) {
     res.status(500)
             .send({message:"erreur"})
@@ -39,7 +50,7 @@ exports.AddProduct = async (req, res) => {
       const { Name } = req.body;
   
       // Check if product exists
-      const prodExists = await products.findOne({ Name });
+      const prodExists = await products.find(req.params.name);
   
       if (prodExists) {
         return res.status(400).json({

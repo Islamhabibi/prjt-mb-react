@@ -5,7 +5,7 @@
     --dt-row-stripe: 0, 0, 0;
     --dt-row-hover: 0, 0, 0;
     --dt-column-ordering: 0, 0, 0;
-    --dt-html-background: white
+    --dt-html-background: #fff
 }
 
 :root.dark {

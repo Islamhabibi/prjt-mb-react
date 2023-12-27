@@ -2,25 +2,16 @@ import React, { useEffect, useState } from 'react'
 import '../../assets/styles/css/style.default.css'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import { useDispatch, useSelector } from 'react-redux';
-import { GetAllProducts } from '../Redux/Action/ProductAction';
-function ProductsGroupe() {
-  const [key, setKey] = useState('Droguerie');
+import { addToBasket } from '../Redux/Action/ProductAction';
+import { useDispatch } from 'react-redux';
+function ProductsGroupe( {data}) {
   const dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch(GetAllProducts())
-  },[])
-  const userFormState = useSelector((state)=> state.product.products)
- const namCatg = userFormState.idCategorie
-  console.log(userFormState)
+  const [key, setKey] = useState('Droguerie');
+  const [quantity, setQuantity] = useState(1)
+  //console.log({data})
   return (
-    <><section className="py-5">
-    <header class="mb-3 text-center">
-      <p className="small text-muted small text-uppercase mb-1">
-        Made the hard way
-      </p>
-      <h2 className="h5 text-uppercase mb-4">Top trending products</h2>
-    </header>
+    <>
+    
      <Tabs
       id="controlled-tab-example"
       activeKey={key}
@@ -29,36 +20,32 @@ function ProductsGroupe() {
     >
       <Tab eventKey="Droguerie" title="Droguerie" >
       <div className="row">
-        {userFormState?.map(
+        {data?.map(
           (e)=>((e.idCategorie === key)?
         <><div class="col-xl-3 col-lg-4 col-sm-6">
              <div className="product text-center">
         <div className="position-relative mb-3">
           <div className="badge text-white bg-" />
-          <a className="d-block" href="detail.html">
+          <a className="d-block" href={`/detail-product/${e._id}`}>
             <img
-              className="img-fluid w-100"
+              className="img-fluid w-100" 
               src={e.Avatar}
               alt="..."
             />
           </a>
           <div className="product-overlay">
             <ul className="mb-0 list-inline">
+              
               <li className="list-inline-item m-0 p-0">
-                <a className="btn btn-sm btn-outline-dark" href="#!">
-                  <i className="far fa-heart" />
-                </a>
-              </li>
-              <li className="list-inline-item m-0 p-0">
-                <a className="btn btn-sm btn-dark" href="cart.html">
+                <a className="btn btn-sm btn-dark" onClick={()=>dispatch(addToBasket({pro:e, quantity}))}>
                   Add to cart
                 </a>
               </li>
               <li className="list-inline-item me-0">
                 <a
                   className="btn btn-sm btn-outline-dark"
-                  href="#productView"
-                  data-bs-toggle="modal"
+                  href={`/detail-product/${e._id}`}
+                  
                 >
                   <i className="fas fa-expand" />
                 </a>
@@ -68,11 +55,11 @@ function ProductsGroupe() {
         </div>
         <h6>
           {" "}
-          <a className="reset-anchor" href="detail.html">
-            Kui Ye Chen’s AirPods
+          <a className="reset-anchor" href={`/detail-product/${e._id}`}>
+            {e.Name}
           </a>
         </h6>
-        <p className="small text-muted">$250</p>
+        <p className="small text-muted">${e.Price}</p>
       </div></div>
        </>:null
         ))}
@@ -80,13 +67,13 @@ function ProductsGroupe() {
       </Tab>
       <Tab eventKey="General hygiene" title="General hygiene">
       <div className="row">
-        {userFormState?.map(
+        {data?.map(
           (e)=>((e.idCategorie === key)?
         <><div class="col-xl-3 col-lg-4 col-sm-6">
              <div className="product text-center">
         <div className="position-relative mb-3">
           <div className="badge text-white bg-" />
-          <a className="d-block" href="detail.html">
+          <a className="d-block" href={`/detail-product/${e._id}`}>
             <img
               className="img-fluid w-100"
               src={e.Avatar}
@@ -95,21 +82,18 @@ function ProductsGroupe() {
           </a>
           <div className="product-overlay">
             <ul className="mb-0 list-inline">
+              
               <li className="list-inline-item m-0 p-0">
-                <a className="btn btn-sm btn-outline-dark" href="#!">
-                  <i className="far fa-heart" />
-                </a>
-              </li>
-              <li className="list-inline-item m-0 p-0">
-                <a className="btn btn-sm btn-dark" href="cart.html">
+                <a className="btn btn-sm btn-dark" 
+                  onClick={()=>dispatch(addToBasket({pro:e, quantity}))}>
                   Add to cart
                 </a>
               </li>
               <li className="list-inline-item me-0">
                 <a
                   className="btn btn-sm btn-outline-dark"
-                  href="#productView"
-                  data-bs-toggle="modal"
+                  href={`/detail-product/${e._id}`}
+                  
                 >
                   <i className="fas fa-expand" />
                 </a>
@@ -119,11 +103,11 @@ function ProductsGroupe() {
         </div>
         <h6>
           {" "}
-          <a className="reset-anchor" href="detail.html">
-            Kui Ye Chen’s AirPods
+          <a className="reset-anchor" href={`/detail-product/${e._id}`}>
+            {e.Name}
           </a>
         </h6>
-        <p className="small text-muted">$250</p>
+        <p className="small text-muted">${e.Price}</p>
       </div></div>
        </>:null
         ))}
@@ -131,13 +115,13 @@ function ProductsGroupe() {
       </Tab>
       <Tab eventKey="Brush" title="Brush">
       <div className="row">
-        {userFormState?.map(
+        {data?.map(
           (e)=>((e.idCategorie === key)?
         <><div class="col-xl-3 col-lg-4 col-sm-6">
              <div className="product text-center">
         <div className="position-relative mb-3">
           <div className="badge text-white bg-" />
-          <a className="d-block" href="detail.html">
+          <a className="d-block" href={`/detail-product/${e._id}`}>
             <img
               className="img-fluid w-100"
               src={e.Avatar}
@@ -146,21 +130,18 @@ function ProductsGroupe() {
           </a>
           <div className="product-overlay">
             <ul className="mb-0 list-inline">
+               
               <li className="list-inline-item m-0 p-0">
-                <a className="btn btn-sm btn-outline-dark" href="#!">
-                  <i className="far fa-heart" />
-                </a>
-              </li>
-              <li className="list-inline-item m-0 p-0">
-                <a className="btn btn-sm btn-dark" href="cart.html">
+                <a className="btn btn-sm btn-dark" 
+                  onClick={()=>dispatch(addToBasket({pro:e, quantity}))}>
                   Add to cart
                 </a>
               </li>
               <li className="list-inline-item me-0">
-                <a
-                  className="btn btn-sm btn-outline-dark"
-                  href="#productView"
-                  data-bs-toggle="modal"
+              <a
+                  to={`/detail-product/${e._id}`}
+                  className="product-btn"
+                  
                 >
                   <i className="fas fa-expand" />
                 </a>
@@ -170,11 +151,11 @@ function ProductsGroupe() {
         </div>
         <h6>
           {" "}
-          <a className="reset-anchor" href="detail.html">
-            Kui Ye Chen’s AirPods
+          <a className="reset-anchor"href={`/detail-product/${e._id}`}>
+            {e.Name}
           </a>
         </h6>
-        <p className="small text-muted">$250</p>
+        <p className="small text-muted">${e.Price}</p>
       </div></div>
        </>:null
         ))}
@@ -183,7 +164,7 @@ function ProductsGroupe() {
     </Tabs>
       
    
-</section>
+ 
 
     </>
   )

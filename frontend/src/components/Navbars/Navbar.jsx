@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router'
 import { getcurrent, logout } from '../Redux/Action/TeamAction'
 import { Link } from 'react-router-dom'
 import logo from "../../assets/img/logo/mb-mt.png"   
-
-function Navbar() {
+import Menuitems from './MenuItems';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+const Navbar = ({ selectedItem, onItemClick }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   useEffect(()=>{
@@ -48,22 +49,38 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
     <ul className="navbar-nav flex-row align-items-center ms-auto">
+       
     <li className="nav-item">
-        <Link className="nav-link menu-link  " to={'/category-list'} >
+        <Link className="nav-link menu-link  " to={'/admin/dashboard'} >
           Category  
         </Link>
       </li>
     <li className="nav-item">
-        <Link className="nav-link menu-link  " to={'/customer-all'} >
+        <Link className="nav-link menu-link  " to={'/admin/customer-all'} >
           All Customers
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link menu-link  " to={'/Users'} >
+        <Link className="nav-link menu-link  " to={'/admin/Users'} >
           Teams
         </Link>
       </li>
-      
+      <li className="nav-item">
+        <Link className="nav-link menu-link  " to={'/admin/product-list'} >
+          Product
+        </Link>
+      </li>
+      <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Another action
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">
+                Separated link
+              </NavDropdown.Item>
+            </NavDropdown>
       <>
     {user.FullName? 
     <>
@@ -96,7 +113,7 @@ function Navbar() {
         
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to={'/login'} onClick={()=>dispatch(logout(navigate))}>
+        <Link className="nav-link" to={'/auth/login'} onClick={()=>dispatch(logout(navigate))}>
             Logout
         </Link>
       </li>
@@ -105,12 +122,12 @@ function Navbar() {
     {!user?.FullName?
     <>
       <li className="nav-item">
-        <Link className="nav-link" to={'/register'}>
+        <Link className="nav-link" to={'/auth/register'}>
             Register
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to={'/login'}>
+        <Link className="nav-link" to={'/auth/login'}>
             Login
         </Link>
         </li>

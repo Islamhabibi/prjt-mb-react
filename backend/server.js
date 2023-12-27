@@ -7,10 +7,11 @@ const categorieRoute = require('./routes/categorieRoutes');
 const teamRoute = require('./routes/teamRoutes');
 const customerRoute = require('./routes/CustomerRoutes');
 const productRoute = require('./routes/productRoutes');
+const routerPayment = require('./routes/PaiementRouter'); 
 const port = process.env.PORT || 5000
 
 //init app   
-const app = express()
+const app = express() 
 app.use(express.json())
 /*app.use(cors({
     origin: "http://localhost:3001" 
@@ -18,7 +19,8 @@ app.use(express.json())
 //connect db
 connectDB() 
 app.use('/categories',categorieRoute) 
-app.use('/team',teamRoute)  
+app.use('/team',teamRoute)   
 app.use('/customer',customerRoute)
 app.use('/product',productRoute) 
+app.use('/paiement',routerPayment)
 app.listen(port,console.log(`server is runing at http://localhost:${port}`)) 

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { DeleteCategorie, GetCategorie, GetCategories } from '../../Redux/Action/CategorieAction'
 import CardAddCategorie from './CardAddCategorie'
 import CardUpdateCategorie from './CardUpdateCategorie'
+import Navbar from '../../Navbars/Navbar'
 
 function CardListCategories() {
  
@@ -18,7 +19,7 @@ function CardListCategories() {
   console.log(userFormState)
   return (
     < >
-    
+    <Navbar/>
          <div className="container-xxl flex-grow-1 container-p-y">
   {/* Users List Table */}
   <div className="card">

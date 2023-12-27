@@ -17,8 +17,8 @@ exports.customervalidation= [
     body("Password","Minimum length 8 characters ").isLength({min:8})
 ]
 exports.loginvalidation= [
-    body("email","email is note valide").isEmail(),
-    body("password","minimum length 8 cara").isLength({min:7})
+    body("Email","email is note valide").isEmail(),
+    body("Password","minimum length 8 cara").isLength({min:7})
 ]
 exports.productvalidation= [
     body("Name","You have to put the name of product").notEmpty(),

@@ -8,6 +8,6 @@ productRoute.post('/addproduct',productvalidation,validation,AddProduct)
 productRoute.put('/updateprod/:id',validation,UpdateProduct)
 productRoute.delete('/deleteprod/:id',DeletProduct)
 productRoute.delete('/deletemanyprod',deletProducts)
-productRoute.get('/prodcatg/',getProductCateg)
+productRoute.get('/prodcatg/:name',getProductCateg)
 
 module.exports = productRoute 

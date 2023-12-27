@@ -3,167 +3,191 @@ import { BiShoppingBag } from "react-icons/bi";
 import ReactImageGallery from "react-image-gallery";
 import Rater from "react-rater";
 import "react-rater/lib/react-rater.css";
+import FrontNavbar from "../Navbars/FrontNavbar";
+import { useParams } from "react-router";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { FindProduct, GetAllProducts, addToBasket } from "../Redux/Action/ProductAction";
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+import ProductsCarousel from "./ProductsCarousel";
+import FooterCustomer from "../Footers/FooterCustomer";
 
 const ProductDetail = () => {
-  const productDetailItem = {
-    images: [
-      {
-        original:
-          "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600",
-        thumbnail:
-          "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=600",
-      },
-      {
-        original:
-          "https://images.pexels.com/photos/1667088/pexels-photo-1667088.jpeg?auto=compress&cs=tinysrgb&w=600",
-        thumbnail:
-          "https://images.pexels.com/photos/1667088/pexels-photo-1667088.jpeg?auto=compress&cs=tinysrgb&w=600",
-      },
-      {
-        original:
-          "https://images.pexels.com/photos/2697787/pexels-photo-2697787.jpeg?auto=compress&cs=tinysrgb&w=600",
-        thumbnail:
-          "https://images.pexels.com/photos/2697787/pexels-photo-2697787.jpeg?auto=compress&cs=tinysrgb&w=600",
-      },
-      {
-        original:
-          "https://images.pexels.com/photos/3373736/pexels-photo-3373736.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        thumbnail:
-          "https://images.pexels.com/photos/3373736/pexels-photo-3373736.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      },
-      {
-        original:
-          "https://images.pexels.com/photos/3910071/pexels-photo-3910071.jpeg?auto=compress&cs=tinysrgb&w=600",
-        thumbnail:
-          "https://images.pexels.com/photos/3910071/pexels-photo-3910071.jpeg?auto=compress&cs=tinysrgb&w=600",
-      },
-    ],
-    title: "BIG ITALIAN SOFA",
-    reviews: "150",
-    availability: true,
-    brand: "apex",
-    category: "Sofa",
-    sku: "BE45VGTRK",
-    price: 450,
-    previousPrice: 599,
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem exercitationem voluptate sint eius ea assumenda provident eos repellendus qui neque! Velit ratione illo maiores voluptates commodi eaque illum, laudantium non!",
-    size: ["XS", "S", "M", "L", "XL"],
-    color: ["gray", "violet", "red"],
-  };
-  const plusMinuceButton =
-    "flex h-8 w-8 cursor-pointer items-center justify-center border duration-100 hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500";
-  return (
-    <section className="container flex-grow mx-auto max-w-[1200px] border-b py-5 lg:grid lg:grid-cols-2 lg:py-10">
-      {/* image gallery */}
-      <div className="container mx-auto px-4">
-        <ReactImageGallery
-          showBullets={false}
-          showFullscreenButton={false}
-          showPlayButton={false}
-          items={productDetailItem.images}
-        />
-
-        {/* /image gallery  */}
-      </div>
-      {/* description  */}
-
-      <div className="mx-auto px-5 lg:px-5">
-        <h2 className="pt-3 text-2xl font-bold lg:pt-0">
-          {productDetailItem.title}
-        </h2>
-        <div className="mt-1">
-          <div className="flex items-center">
-            <Rater
-              style={{ fontSize: "20px" }}
-              total={5}
-              interactive={false}
-              rating={3.5}
-            />
-
-            <p className="ml-3 text-sm text-gray-400">
-              ({productDetailItem.reviews})
-            </p>
-          </div>
-        </div>
-        <p className="mt-5 font-bold">
-          Availability:{" "}
-          {productDetailItem.availability ? (
-            <span className="text-green-600">In Stock </span>
-          ) : (
-            <span className="text-red-600">Expired</span>
-          )}
-        </p>
-        <p className="font-bold">
-          Brand: <span className="font-normal">{productDetailItem.brand}</span>
-        </p>
-        <p className="font-bold">
-          Cathegory:{" "}
-          <span className="font-normal">{productDetailItem.category}</span>
-        </p>
-        <p className="font-bold">
-          SKU: <span className="font-normal">{productDetailItem.sku}</span>
-        </p>
-        <p className="mt-4 text-4xl font-bold text-violet-900">
-          ${productDetailItem.price}{" "}
-          <span className="text-xs text-gray-400 line-through">
-            ${productDetailItem.previousPrice}
-          </span>
-        </p>
-        <p className="pt-5 text-sm leading-5 text-gray-500">
-          {productDetailItem.description}
-        </p>
-        <div className="mt-6">
-          <p className="pb-2 text-xs text-gray-500">Size</p>
-          <div className="flex gap-1">
-            {productDetailItem.size.map((x, index) => {
-              return (
+  const id = useParams()
+ // console.log(id)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(FindProduct(id.id));
+    dispatch(GetAllProducts());
+  }, []);
+  const product = useSelector((state) => state.product.product);
+  const userFormState = useSelector((state)=> state.product.products) 
+  //console.log(product);
+  const [key, setKey] = useState('Description');
+  const [quantity, setQuantity] = useState(1)
+ 
+ return(
+  <>
+  <FrontNavbar/>
+    <section className="py-5">
+  <div className="container py-5">
+    <div className="row">
+      <div className="col-lg-6 mb-5 mb-lg-0">
+        <div className="row">
+          <div className="col-md-10 order-1 order-md-2 mb-4 mb-lg-0">
+            {/* Item slider*/}
+            <div
+              className="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events"
+              id="detailSlider"
+            >
+              <div
+                className="swiper-wrapper"
+                id="swiper-wrapper-ac9bfa31e92786f10"
+                aria-live="polite"
+                style={{ transform: "translate3d(0px, 0px, 0px)" }}
+              >
+                   
                 <div
-                  key={index}
-                  className="flex h-8 w-8 cursor-pointer items-center justify-center border duration-100 hover:bg-neutral-100 focus:ring-2 focus:ring-gray-500 active:ring-2 active:ring-gray-500"
+                  className="swiper-slide"
+                  role="group"
+                  aria-label="4 / 4"
+                  style={{ width: 523, marginRight: 10 }}
                 >
-                  {x}
+                 
+                    <img
+                    style={{backgroundColor: "#f4f5fa"}}
+                      className="img-fluid"
+                      src={product.Avatar}
+                      alt=".."
+                    />
+                   
                 </div>
-              );
-            })}
-          </div>
-        </div>
-        <div className="mt-6">
-          <p className="pb-2 text-xs text-gray-500">Color</p>
-          <div className="flex gap-1">
-            {productDetailItem.color.map((x, index) => {
-              return (
-                <div
-                  key={index}
-                  className={`h-8 w-8 cursor-pointer border border-white bg-${x}-600 focus:ring-2 focus:ring-${x}-500 active:ring-2 active:ring-${x}-500`}
-                />
-              );
-            })}
-          </div>
-        </div>
-        <div className="mt-6">
-          <p className="pb-2 text-xs text-gray-500">Quantity</p>
-          <div className="flex">
-            <button className={`${plusMinuceButton}`}>−</button>
-            <div className="flex h-8 w-8 cursor-text items-center justify-center border-t border-b active:ring-gray-500">
-              1
+              </div>
+              <span
+                className="swiper-notification"
+                aria-live="assertive"
+                aria-atomic="true"
+              />
             </div>
-            <button className={`${plusMinuceButton}`}> +</button>
           </div>
-        </div>
-        <div className="mt-7 flex flex-row items-center gap-6">
-          <button className="flex h-12 w-1/3 items-center justify-center bg-violet-900 text-white duration-100 hover:bg-blue-800">
-            <BiShoppingBag className="mx-2" />
-            Add to cart
-          </button>
-          <button className="flex h-12 w-1/3 items-center justify-center bg-amber-400 duration-100 hover:bg-yellow-300">
-            <AiOutlineHeart className="mx-2" />
-            Wishlist
-          </button>
         </div>
       </div>
-    </section>
-  );
+      {/* Item info*/}
+      <div className="col-lg-6">
+        <div className="badge bg-info small rounded-0 mb-2">Trending</div>
+        <h1>{product.Name}</h1>
+         
+        <p className="h4">${product.Price}</p>
+        <p className="text-small mb-4">
+        {product.Description}
+        </p>
+        
+        <div className="d-flex align-items-center mb-4">
+          <div className="border d-flex align-items-center justify-content-between p-1 me-2">
+            <div className="quantity py-0">
+            <button className="inc-btn p-0" 
+              onClick={()=>quantity>1?setQuantity (quantity-1):quantity} >
+              
+              <i className="fas fa-solid fa-minus" />
+            </button>
+              
+              <input
+                className="form-control border-0 shadow-0 p-0 quantity-result align-items-center"
+                type="text"
+                value={quantity}
+               
+              />
+              <button className="dec-btn p-0" 
+                onClick={()=>setQuantity (quantity+1)} >
+               
+               <i className="fas fa-caret-left fa-solid fa-plus" />
+             </button>
+            </div>
+          </div>
+          <a
+            className="btn btn-primary btn-sm py-2 border-bottom-0 px-5 me-3"
+            onClick={()=>dispatch(addToBasket({pro:product, quantity}))}
+          >
+            {" "}
+            <i className="fas fa-shopping-bag py-1 me-2" />
+            Add to cart
+          </a>
+          <a className="p-0 reset-anchor d-inline-block mx-2"  >
+            <i className="fas fa-heart" />
+          </a>
+          <a className="p-0 reset-anchor d-inline-block mx-2">
+            <i className="fas fa-share-alt" />
+          </a>
+        </div>
+        <br />
+        
+      </div>
+    </div>
+  </div>
+</section>
+<section className="pb-5">
+  <div className="container">
+    <div className="row">
+   
+      {/* Item information*/}
+      <div className="col-xl-10 mx-auto">
+     
+      <Tabs
+            id="controlled-tab-example"
+            activeKey={key}
+           
+            onSelect={(k) => setKey(k)}
+            className="nav nav-tabs tabs-fill  border-0 flex-column flex-md-row nav-link text-small fw-bold py-3 border-0 "
+           
+          >
+        <Tab eventKey="Description" title="Description"  className="tab-content tab-pane fade show" >
+           
+              <p className="text-muted mb-4 p-3 ">
+                {product.Description}
+              </p>
+                
+        </Tab>
+        
+        <Tab eventKey="Additional" title="Additional info" >
+            <div className="row">
+                <div className="col-lg-6">
+                  <table className="table table-bordered">
+                    <tbody>
+                      <tr>
+                        <th className="small px-3">Category:</th>
+                        <td className="small px-3">{product.idCategorie}</td>
+                      </tr>
+                      <tr>
+                        <th className="small px-3">Available stock:</th>
+                        <td className="small px-3">{product.QtStock}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>        
+          
+          </Tab>
+          </Tabs>
+       
+      </div>
+    </div>
+  </div>
+</section>
+<div class="col-xl-8 mx-auto row pb-5">
+  <header class="mb-3 text-center">
+    <p className="small text-muted small text-uppercase mb-1">
+      Made the hard way
+    </p>
+    <h2 className="h5 text-uppercase mb-4">Top trending products</h2>
+  </header>
+  <ProductsCarousel data={userFormState}/>
+</div>  
+<FooterCustomer/>     
+        
+</>
+ ) 
+
 };
 
 export default ProductDetail;

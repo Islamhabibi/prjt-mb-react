@@ -1,17 +1,18 @@
 import React from 'react'
-
+import logo from "../../assets/img/logo/mb-mt.png"
+import { Link } from 'react-router-dom'
 function FooterCustomer() {
   return (
     <>
-      <footer className="bg-dark">
+      <footer className="border-top">
   <div className="container py-5">
     <div className="row">
       <div className="col-md-4 col-sm-12 mb-3 mb-md-0">
         <img
           className="img-fluid mb-3"
-          src="https://d19m59y37dris4.cloudfront.net/shopio/1-1/img/logo-white.5bd15ea4.svg"
+          src={logo}
           alt="Patrol"
-          width={120}
+          width={200}
         />
         <p className="text-muted">We are Shopio.</p>
         <ul className="list-inline">
@@ -32,68 +33,15 @@ function FooterCustomer() {
           </li>
         </ul>
       </div>
-      <div className="col-md-2 col-sm-12 mb-3 mb-md-0">
-        <h6 className="text-white">Menu</h6>
-        <ul className="list-unstyled text-muted mb-0">
-          <li className="mb-2">
-            {" "}
-            <a className="reset-anchor" href="#">
-              About
-            </a>
-          </li>
-          <li className="mb-2">
-            <a className="reset-anchor" href="#">
-              Blog
-            </a>
-          </li>
-          <li className="mb-2">
-            <a className="reset-anchor" href="#">
-              Contact
-            </a>
-          </li>
-          <li className="mb-2">
-            <a className="reset-anchor" href="#">
-              FAQ
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div className="col-md-2 col-sm-12 mb-3 mb-md-0">
-        <h6 className="text-white">Checkout</h6>
-        <ul className="list-unstyled text-muted mb-0">
-          <li className="mb-2">
-            {" "}
-            <a className="reset-anchor" href="#">
-              My Account
-            </a>
-          </li>
-          <li className="mb-2">
-            {" "}
-            <a className="reset-anchor" href="#">
-              Orders Tracking
-            </a>
-          </li>
-          <li className="mb-2">
-            {" "}
-            <a className="reset-anchor" href="#">
-              Checkout
-            </a>
-          </li>
-          <li className="mb-2">
-            {" "}
-            <a className="reset-anchor" href="#">
-              Wishlist
-            </a>
-          </li>
-        </ul>
-      </div>
       <div className="col-md-4 col-sm-12 mb-3 mb-md-0">
         <p className="lead mb-1 text-white">
           <a className="reset-anchor" href="tel:+1 123 456 789">
             +1 123 456 789
           </a>
         </p>
-        <p className="text-muted">12 El Dorado, Las Vegas, AZ</p>
+        <p className="text-muted">385 avenue Jean Monnet<br/>
+          ZA Domitia - Route de Fourques
+          30300 Beaucaire</p>
         <ul className="list-inline mb-0">
           <li className="list-inline-item">
             <a className="social-icon" href="#">
@@ -117,6 +65,30 @@ function FooterCustomer() {
           </li>
         </ul>
       </div>
+      <div className="col-md-2 col-sm-12 mb-3 mb-md-0">
+        <h6 className="text-white">Menu</h6>
+        <ul className="list-unstyled text-muted mb-0">
+         
+        <li className="mb-2">
+            <a className="reset-anchor" href="/">
+              Home
+            </a>
+          </li>
+          <li className="mb-2">
+            <a className="reset-anchor" href="/contact-us">
+              Contact
+            </a>
+          </li>
+          <li className="mb-2">
+            {" "}
+            <Link className="nav-link" to={'/basket'}>
+              Checkout
+            </Link>
+          </li>
+        </ul>
+      </div>
+     
+    
     </div>
   </div>
   <div className="container">

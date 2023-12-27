@@ -8,7 +8,7 @@ const jwt  =  require('jsonwebtoken')
  * @route GET /customer/all
  * @desc Get customer data
  * @access Private
- */
+ */ 
 exports.getCustomer = async (req,res) =>
 {
     try {

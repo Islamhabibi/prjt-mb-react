@@ -11,7 +11,7 @@
 }
 
 body {
-  background: #f4f5fa;
+  background: #ffffff;
 }
 
 .bg-body {
@@ -287,7 +287,10 @@ button.list-group-item-primary.active {
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-link.active:hover,
 .nav-tabs .nav-link.active:focus {
-  color: #3c3d91;
+  
+  font-weight: 700 !important;
+  color: white;
+  background-color: #4650dd;
 }
 
 .nav-tabs .nav-link.waves-effect .waves-ripple {

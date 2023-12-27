@@ -1,10 +1,12 @@
-import { ALLPRODUCT, GETCATEGORIE, ONECATEGORIE, ONEPRODUCT } from "../Actiontype/CategorieActionType"
+import { ALLPRODUCT, GETCATEGORIE, ONECATEGORIE, ONEPRODUCT, PRODUCTCATG } from "../Actiontype/CategorieActionType"
 
 const initialState ={
     categories:[],
     categorie:{},
     products: [],
-    product:{}
+    productsByCategory: [],
+    product:{},
+    basket: []
 }
 export const reducer_categorie =  (state = initialState, { type, payload }) => {
     switch (type) {
@@ -24,7 +26,13 @@ export const reducer_product =  (state = initialState, { type, payload }) => {
         case ALLPRODUCT:
             return { ...state, products: payload }
         case ONEPRODUCT:
-            return { ...state, product: payload }  
+            return { ...state, product: payload } 
+        case PRODUCTCATG:
+            return {...state,productsByCategory:payload}    
+        case "ADDTOBASKET":
+            return{...state, basket:[...state.basket,payload]}
+        case "REMOVEFROMBASKET":
+        return{...state, basket:state.basket.filter(e=>e.pro._id !== payload)}     
         default:
             return state
     }

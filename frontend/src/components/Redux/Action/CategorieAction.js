@@ -17,7 +17,7 @@ export const GetCategorie=(id) => async(dispatch) =>
     try {
         const res= await axios
             .get('/categories/detailcatg/'+id)
-            .then((res)=>dispatch({type:ONECATEGORIE,payload:res.data.OneCategorie}))
+            .then((res)=>dispatch({type:ONECATEGORIE,payload:res.data.ProductCatg}))
            // console.log(res)
     } catch (error) {
         console.log(error)

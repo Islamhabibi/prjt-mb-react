@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import '../../assets/styles/css/pages/productsCarousel.css'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { GetAllProducts } from '../Redux/Action/ProductAction';
+import {Link, Navigate, useNavigate} from 'react-router-dom'
+import { addToBasket } from '../Redux/Action/ProductAction';
+import { useDispatch } from 'react-redux';
+import AddCart from './AddCart';
 
 
 const responsive = {
@@ -29,23 +31,13 @@ const responsive = {
       slidesToSlide: 1
     }
   };
-function ProductsCarousel() {
-  
+function ProductsCarousel({data}) {
   const dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch(GetAllProducts())
-  },[])
-  const userFormState = useSelector((state)=> state.product.products)
-  
-  console.log(userFormState)
+  const [quantity, setQuantity] = useState(1)
+//console.log({data})
   return (
      <>
-        <section className="py-5">
-  <div className="container py-5">
-    <header className="mb-3 text-center">
-      <h2 className="mb-0">New arrivals</h2>
-      <p className="text-muted">Browse the Newest Products</p>
-    </header>
+        
     <div
       className="swiper-container pt-5 swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events"
       id="newArrivals"
@@ -65,7 +57,7 @@ function ProductsCarousel() {
             keyBoardControl={true}
             transitionDuration={500}            
         >  
-          {userFormState?.map((e)=>(
+           {data?.map((e)=>(
             <div>
             <div
               className="swiper-slide pb-5 swiper-slide-duplicate"
@@ -76,7 +68,7 @@ function ProductsCarousel() {
             >
               <div className="product mb-4">
               <span className="badge rounded-0 bg-" />
-              <a href="detail.html">
+              <a  href={`/detail-product/${e._id}`}>
                 <img
                   className="img-fluid"
                   src={e.Avatar}
@@ -84,30 +76,28 @@ function ProductsCarousel() {
                 />
               </a>
               <div className="cta shadow d-inline-block">
-                <a className="product-btn" href="#">
-                  <i className="fas fa-heart" />
-                </a>
+              
                 <a
+                  href={`/detail-product/${e._id}`}
                   className="product-btn"
-                  href="#productView"
-                  data-bs-toggle="modal"
+                  
                 >
                   <i className="fas fa-expand" />
                 </a>
-                <a className="product-btn" href="cart.html">
+                <a className="product-btn" onClick={()=>dispatch(addToBasket({pro:e, quantity}))}>
                   <i className="fas fa-dolly-flatbed" />
                 </a>
               </div>
           </div>
           <h6 className="text-center">
-            <a className="reset-anchor" href="detail.html">
+            <a className="reset-anchor" href={`/detail-product/${e._id}`}>
             {e.Name}
             </a>
           </h6>
           <p className="text-center text-muted font-weight-bold">${e.Price}</p>
         </div>
       </div>
-          ))}
+          ))} 
           
           
          
@@ -116,8 +106,7 @@ function ProductsCarousel() {
        
       </div>
     </div>
-  </div>
-</section>
+  
 
 
      </>

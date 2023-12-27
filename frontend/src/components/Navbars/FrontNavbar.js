@@ -5,12 +5,13 @@ import { getcurrent, logout } from '../Redux/Action/TeamAction'
 import { Link } from 'react-router-dom'
 import logo from "../../assets/img/logo/mb-mt.png"
 import Icon from '@mdi/react';
-import { mdiAccount, mdiBasket, mdiLeadPencil } from '@mdi/js'
-import Registercustomer from '../../views/Customer/Registercustomer'
+import { mdiBasket} from '@mdi/js'
+ 
 import LoginCustomer from '../../views/Customer/LoginCustomer'
 function FrontNavbar() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const basket = useSelector(state=>state.product.basket)
   useEffect(()=>{
     dispatch(getcurrent())
   },[])
@@ -33,11 +34,13 @@ function FrontNavbar() {
   >
     <div className="navbar-nav align-items-center">
       <div className="nav-item d-flex align-items-center">
+      <Link to="/" >
       <img
               src= {logo}
               alt="auth-tree"
               className="app-brand-logo demo"
             />
+            </Link >
       </div>
     </div>
        
@@ -55,7 +58,13 @@ function FrontNavbar() {
       </div>
       <LoginCustomer/>
         
-      <span> <Icon path={mdiBasket} size={1} /></span>
+      <span>
+        <Link className="nav-link" to={'/basket'}>
+         <Icon path={mdiBasket} size={1} />{basket.length}
+        </Link> 
+        </span>  
+          
+       
        
     </div>
      </div>

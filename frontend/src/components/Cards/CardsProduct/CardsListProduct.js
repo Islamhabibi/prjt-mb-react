@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { DeleteCategorie, GetCategorie, GetCategories } from '../../Redux/Action/CategorieAction'
  import { DeleteProduct, GetAllProducts } from '../../Redux/Action/ProductAction'
  import Button from 'react-bootstrap/Button';
+import Navbar from '../../Navbars/Navbar'
 function truncateText(text, maxLength) {
   if (typeof text !== 'string' || text.length <= maxLength) {
     return text;
@@ -25,7 +26,7 @@ function CardsListProduct() {
  
   return (
     < >
-    
+    <Navbar/>
          <div className="container-xxl flex-grow-1 container-p-y">
   {/* Users List Table */}
   <div className="card">
@@ -114,7 +115,7 @@ function CardsListProduct() {
                 </div>
               </div>
               <div className="add-new">
-              <Link to={`/Add-product`}>
+              <Link to={`/admin/add-product`}>
               <Button variant="primary" >
                 Add New Product
             </Button>

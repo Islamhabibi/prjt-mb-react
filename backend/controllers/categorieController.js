@@ -36,6 +36,26 @@ exports.getCategorie = async (req,res)=>
         .send({message:'Erreur'})
     }
 }
+/**
+ * @route GET /categorie
+ * @desc Get categorie by name data
+ * @access Private
+ */
+exports.getCategoriebyName = async (req,res)=>
+{
+    try {
+        const OneCategorie = await categories.findOne({Name})
+        if(!OneCategorie)
+        {
+            return res.status(404).send({ message: 'Categorie not found' });
+        }
+            res.status(200)
+            .send({message:'Data of Categorie',OneCategorie})
+    } catch (error) {
+        res.status(500)
+        .send({message:'Erreur'})
+    }
+}
 
 /**
  * @route POST /categories/categorie
