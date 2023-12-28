@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router'
 import { getcurrent, logout } from '../Redux/Action/TeamAction'
 import { Link } from 'react-router-dom'
 import logo from "../../assets/img/logo/mb-mt.png"   
-import Menuitems from './MenuItems';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 const Navbar = ({ selectedItem, onItemClick }) => {
   const navigate = useNavigate()
@@ -99,8 +98,8 @@ const Navbar = ({ selectedItem, onItemClick }) => {
     <li className="nav-item navbar-dropdown dropdown-user dropdown">
         <a
           className="nav-link dropdown-toggle hide-arrow p-0"
-          href="javascript:void(0);"
-          data-bs-toggle="dropdown"
+          href="#"
+         
         >
           <div className="avatar avatar-online">
             <img

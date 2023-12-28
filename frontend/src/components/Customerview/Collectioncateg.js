@@ -17,23 +17,23 @@ function Collectioncateg() {
   </header>
   <div className="row">
     <div className="col-md-4">
-      <a className="category-item" href={`/cart/Wiping Paper`}>
+      <a className="category-item" href={`/category-product/Wiping Paper`}>
         <img className="img-fluid" src={clt1} alt="" />
         <strong className="category-item-title">Wiping Paper</strong>
       </a>
     </div>
     <div className="col-md-4">
-      <a className="category-item mb-4" href={`/cart/Brush`}>
+      <a className="category-item mb-4" href={`/category-product/Brush`}>
         <img className="img-fluid" src={clt2} alt="" />
         <strong className="category-item-title">Brush</strong>
       </a>
-      <a className="category-item" href={`/cart/Droguerie`}>
+      <a className="category-item" href={`/category-product/Droguerie`}>
         <img className="img-fluid" src={clt3} alt="" />
         <strong className="category-item-title">Droguerie</strong>
       </a>
     </div>
     <div className="col-md-4">
-      <a className="category-item" href={`/cart/Trash`}>
+      <a className="category-item" href={`/category-product/Trash`}>
         <img className="img-fluid" src={clt4} alt="" />
         <strong className="category-item-title">Trash</strong>
       </a>

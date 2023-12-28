@@ -6,6 +6,7 @@ import { GetCategories } from '../../Redux/Action/CategorieAction';
 import { AddProduct, Addproduct2 } from '../../Redux/Action/ProductAction';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
+import FooterAdmin from '../../Footers/FooterAdmin';
 function CardAddProduct() {    
     const [Name,setName]= useState('')
     const [Description, setDescription] = useState('');
@@ -19,7 +20,7 @@ function CardAddProduct() {
     const navigate = useNavigate()
     
      
-    
+     
      //recupere list des categ
     useEffect(()=>{
       dispatch(GetCategories())
@@ -27,7 +28,7 @@ function CardAddProduct() {
     const listctg = useSelector((state)=> state.categorie.categories)
    
     //fin fct
-    ///console.log({Name,description,Price,QtStock,idCategorie,Status,Avatar})
+    console.log({Name,Description,Price,QtStock,idCategorie,Status,Avatar})
     const Addprod= async ()=>{ 
       const formaData=new FormData()
       formaData.append('file',Avatar)
@@ -41,9 +42,15 @@ function CardAddProduct() {
               (AddProduct(
                 {Name,Description,Price,QtStock,idCategorie,Status,Avatar:res.data.url}
                 ,navigate)
-              );  console.log({Name,Description,Price,QtStock,idCategorie,Status,Avatar})
+              );  //console.log({Name,Description,Price,QtStock,idCategorie,Status,Avatar})
             }
             )
+          }else{
+            dispatch
+              (AddProduct(
+                {Name,Description,Price,QtStock,idCategorie,Status}
+                ,navigate)
+              );
           }
     }
   return (
@@ -374,7 +381,7 @@ function CardAddProduct() {
     {/* /Second column */}
   </div>
 </div>
- 
+ <FooterAdmin/>
     </>
   )
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import 'quill/dist/quill.snow.css'; // pour importer le style de Quill
-import ReactQuill, { quillEditor } from 'react-quill';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetCategories } from '../../Redux/Action/CategorieAction';
 import {  FindProduct, UpdateProduct } from '../../Redux/Action/ProductAction';
@@ -16,10 +15,10 @@ function CardUpdateProduct() {
     },[])
      const data= useSelector((state)=> state.product.product)
       const listctg = useSelector((state)=> state.categorie.categories)
-        console.log(listctg)
+       // console.log(data)
       const [Name,setName]= useState(data.Name)
       const [Description, setDescription] = useState(data.Description);
-      const [Avatar,setAvatar]= useState(data.Avatar)
+      const [Avatar,setAvatar]= useState([])
       const [Price, setPrice] =useState(data.Price)
       const [QtStock, setQtStock] = useState(data.QtStock)
       const [idCategorie,setIdCategorie]= useState(data.idCategorie)    
@@ -27,15 +26,15 @@ function CardUpdateProduct() {
     const navigate = useNavigate()
     
     const handleChange = (value) => {
+   
         setDescription(value);
-    };  
-    
-    
+    }; 
+   
     const Updateprod= async ()=>{ 
       const formaData=new FormData()
       formaData.append('file',Avatar)
       formaData.append('upload_preset','ml_default')
-      if(!Avatar?.length){
+      if(Avatar?.length === undefined){
         await axios
         .post('https://api.cloudinary.com/v1_1/dm5ktvety/upload',formaData)
         .then(
@@ -44,9 +43,9 @@ function CardUpdateProduct() {
               (UpdateProduct(data._id,
                 {Name,Description,Price,QtStock,idCategorie,Status,Avatar:res.data.url},navigate
                 )
-              );   
+              )   
             }
-            )
+            ) 
           }else { 
             dispatch
             (
@@ -54,10 +53,11 @@ function CardUpdateProduct() {
                     {Name,Description,Price,QtStock,idCategorie,Status,Avatar:data.Avatar},navigate
                     ) 
             )
-          }
+          }//console.log({Name,Description,Price,QtStock,idCategorie,Status,Avatar})
     }
   return (
     <>
+
         <div className="app-ecommerce">
   {/* Add Product */}
   <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
@@ -66,9 +66,10 @@ function CardUpdateProduct() {
       
     </div>
     <div className="d-flex align-content-center flex-wrap gap-3">
-      <button className="btn btn-outline-secondary waves-effect">
+      
+      <a className="btn btn-outline-secondary waves-effect" href={'/admin/product-list'}>
         Discard
-      </button>
+      </a>
       <button className="btn btn-outline-primary waves-effect"
         onChange={(e) => { setStatus(false) }}
         onClick={Updateprod}
@@ -115,23 +116,15 @@ function CardUpdateProduct() {
               Description <span className="text-muted">(Optional)</span>
             </label>
             
-            {/*<textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows={3}
-              
-              value={data.Description}             
-              name="Description"
-              defaultValue={data.Description}
-              onChange={handleChange}
-            />*/}
+            
             <textarea
                 className="form-control"
                 id="exampleFormControlTextarea1"
                 rows={3}
                 defaultValue={data.Description}
                 name="Description"
-                onChange={handleChange}
+                //onChange={handleChange}
+                onChange={(e)=>setDescription(e.target.value)}
             />
             
           </div>
@@ -303,105 +296,7 @@ function CardUpdateProduct() {
             </div>
             
           </div>
-         {/**  <div className="mb-4 col ecommerce-select2-dropdown">
-            <div className="form-floating form-floating-outline form-floating-select2">
-               
-                <select
-                  id="status-org"
-                  className="select2 form-select select2-hidden-accessible"
-                  data-placeholder="Select Status"
-                  data-select2-id="status-org"
-                  tabIndex={-1}
-                  aria-hidden="true"
-                >
-                  <option value="" data-select2-id={12}>
-                    Select Status
-                  </option>
-                  <option value="Published">Published</option>
-                  <option value="Scheduled">Scheduled</option>
-                  <option value="Inactive">Inactive</option>
-                </select>
-                <span
-                  className="select2 select2-container select2-container--default"
-                  dir="ltr"
-                  data-select2-id={11}
-                  style={{ width: 408 }}
-                >
-                  <span className="selection">
-                    <span
-                      className="select2-selection select2-selection--single"
-                      role="combobox"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                      tabIndex={0}
-                      aria-disabled="false"
-                      aria-labelledby="select2-status-org-container"
-                    >
-                      <span
-                        className="select2-selection__rendered"
-                        id="select2-status-org-container"
-                        role="textbox"
-                        aria-readonly="true"
-                      >
-                        
-                      </span>
-                       
-                    </span>
-                  </span>
-                  <span className="dropdown-wrapper" aria-hidden="true" />
-                </span>
-               
-              <label htmlFor="status-org">Status</label>
-            </div>
-            
-          </div>*/}
-             {/* Discounted Price 
-          <div className="form-floating form-floating-outline mb-4">
-            <input
-              type="number"
-              min="10"
-              step="any"
-              className="form-control"
-              id="ecommerce-product-discount-price"
-              placeholder="Discounted Price"
-              name="productDiscountedPrice"
-              aria-label="Product discounted price"
-            />
-            <label htmlFor="ecommerce-product-discount-price">
-              Discounted Price
-            </label>
-          </div>*/}
-          {/* Charge tax check box 
-          <div className="form-check mb-2">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              defaultValue=""
-              id="price-charge-tax"
-              defaultChecked=""
-            />
-            <label className="form-label" htmlFor="price-charge-tax">
-              Charge tax on this product
-            </label>
-          </div>*/}
-          {/* Instock switch
-           <div className="d-flex justify-content-between align-items-center border-top pt-3">
-            <p className="mb-0">In stock</p>
-            <div className="w-25 d-flex justify-content-end">
-              <label className="switch switch-primary  me-4 pe-2">
-                <input
-                  type="checkbox"
-                  className="switch-input"
-                  defaultChecked=""
-                />
-                <span className="switch-toggle-slider">
-                  <span className="switch-on">
-                    <span className="switch-off" />
-                  </span>
-                </span>
-              </label>
-            </div>
-          </div> */}
+         
           </div>
           </div>
     </div>

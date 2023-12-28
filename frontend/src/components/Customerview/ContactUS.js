@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import FrontNavbar from '../Navbars/FrontNavbar'
 import axios from 'axios'
 import { useNavigate } from 'react-router'
+import FooterCustomer from '../Footers/FooterCustomer'
 
 function ContactUS() {
   const [Name,setName] = useState('')
@@ -101,8 +102,8 @@ function ContactUS() {
                   </span>
                 </div>
                 <div className="position-relative col-md-12 text-end">
-                  <a class="btn btn-outline-primary" onClick={sendEmail}> 
-                    <i class="fas  fa-envelope me-2"></i>
+                  <a className="btn btn-primary me-sm-3 me-1 waves-effect waves-light " onClick={sendEmail}> 
+                    <i className="fas  fa-envelope me-2"></i>
                       Send
                   </a>          
                 </div>
@@ -114,6 +115,7 @@ function ContactUS() {
     
        </div>
     </section>
+    <FooterCustomer/>
     </>
   )
 }

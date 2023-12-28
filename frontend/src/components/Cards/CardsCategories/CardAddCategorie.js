@@ -22,13 +22,13 @@ function CardAddCategorie({data}) {
         setParentCategorie(e.target.value);
       };
      
-      console.log({Name,Description,Parent_Categorie,Status})
+      //console.log({Name,Description,Parent_Categorie,Status})
     //function pour dispatche la fct dans l'actionteam
     const Addcategory = async () => {
         const formaData=new FormData()
         formaData.append('file',Avatar)
         formaData.append('upload_preset','ml_default')
-        if(Avatar.length===undefined){console.log({Name,Description,Parent_Categorie,Status})
+        if(Avatar.length===undefined){
             await axios
             .post('https://api.cloudinary.com/v1_1/dm5ktvety/upload',formaData)
             .then(res=> 
@@ -39,14 +39,14 @@ function CardAddCategorie({data}) {
                 )
                 
                 )
-          }else{console.log({Name,Description,Parent_Categorie,Status})
+          }else{
                 dispatch
                 (AddCategorie(
                     {Name,Description,Parent_Categorie,Status,Avatar:data.image},navigate
                     )
                 ); 
                 } 
-                console.log({Name,Description,Parent_Categorie,Status})
+                
         handleClose()
     }
     const dispatch = useDispatch()
@@ -127,7 +127,7 @@ function CardAddCategorie({data}) {
                             <div className="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" />
                         </div>
                         <div className="form-floating form-floating-outline mb-4 fv-plugins-icon-container">
-                            <div class="form-check mb-2">
+                            <div className="form-check mb-2">
 
                                 <input
                                     type="radio"
@@ -138,20 +138,20 @@ function CardAddCategorie({data}) {
                                     //defaultChecked={(data.isEnabled)===true ? "Checked" : ""}
                                     onChange={(e) => { setStatus(true) }}
                                 />
-                                <label class="form-check-label" for="active">Active</label>
+                                <label className="form-check-label" for="active">Active</label>
                             </div>
-                            <div class="form-check">
+                            <div className="form-check">
                                 <input
                                     type="radio"
                                     id="desactive"
                                     name="false"
-                                    class="form-check-input"
+                                    className="form-check-input"
                                     value="inactive"
                                     required=""
                                     defaultChecked=""
                                     onChange={(e) => { setStatus(false) }}
                                 />
-                                <label class="form-check-label" for="desactive">Desactive</label>
+                                <label className="form-check-label" for="desactive">Desactive</label>
                             </div>
 
                             <div className="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" />

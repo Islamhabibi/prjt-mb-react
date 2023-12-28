@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema(
     {
         Name: {type: String, required:true ,minlength: 6},
         Description: String,
-        Avatar: {type:String, default:'https://demos.themeselection.com/materio-bootstrap-html-admin-template/assets/img/avatars/2.png'},
+        Avatar: {type:String, default:'http://res.cloudinary.com/dm5ktvety/image/upload/v1703772230/product_r3fdlb.jpg'},
         Price: Number,
         QtStock: {type: Number, default: 1, min: 1},
         idCategorie: String,

@@ -1,19 +1,18 @@
-import { mdiAccount, mdiBasket } from '@mdi/js';
-import Icon from '@mdi/react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router';
 import { RegisterCustomer } from '../../components/Redux/Action/CustomerAction';
-import { Link } from 'react-router-dom';
 
 function Registercustomer() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const [formData, setFormData] = useState({
     FirstName: '',
     LastName: '',
@@ -22,18 +21,16 @@ function Registercustomer() {
   });
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  
+
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
-  console.log(formData)
+  //console.log(formData)
   //function pour dispatche la fct dans l'actionteam
   const Registeruser = () => {
-    dispatch(RegisterCustomer(formData,navigate))
-   
+    dispatch(RegisterCustomer(formData, navigate))
     handleClose()
   }
-  
   return (
     <>
       <span onClick={handleShow}> No account? Create one here ?   </span>
@@ -105,19 +102,13 @@ function Registercustomer() {
                       <label htmlFor="Password">Password</label>
                     </div>
                     <div className="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" />
-                  </div>
-                  <p className="text-center">
-                    <span>Already have an account?</span>
-                    <Link to={'/userlogin'}>
-                      <span>Sign in instead</span>
-                      </Link>
-                  </p>
+                  </div> 
                 </Form>
               </Modal.Body>
               <Modal.Footer>
                 <Button
-                  className="btn btn-secondary"
-                   onClick={handleClose}>
+                  className="btn btn-outline-secondary waves-effect" variant="secondary"
+                  onClick={handleClose}>
                   Close
                 </Button>
                 <Button variant="primary" onClick={Registeruser}

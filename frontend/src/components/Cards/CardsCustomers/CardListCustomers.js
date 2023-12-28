@@ -3,7 +3,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { mdiDeleteAlert, mdiEyeSettings } from '@mdi/js';
-import { DeleteUser, GetUsersCustomer } from '../Redux/Action/CustomerAction';
+import {  DeleteOneCustomer, GetUsersCustomer } from '../../Redux/Action/CustomerAction';
+import AdminNavbar from '../../Navbars/AdminNavbar';
 
 function CardListCustomers() {
     const dispatch = useDispatch()
@@ -11,33 +12,16 @@ function CardListCustomers() {
       dispatch(GetUsersCustomer())
     },[])
     const userFormState = useSelector((state)=> state.customer.customers)
-    console.log(userFormState)
+    //console.log(userFormState)
   return (
     <>
+    <AdminNavbar/>
     <div className="container-xxl flex-grow-1 container-p-y">
 {/* Users List Table */}
 <div className="card">
   <div className="card-header">
-    <h5 className="card-title">Search Filter</h5>
-    <div className="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
-      <div className="col-md-4 user_status">
-      <div className="me-3">
-              <div
-                id="DataTables_Table_0_filter"
-                className="dataTables_filter"
-              >
-                <label>
-                  <input
-                    type="search"
-                    className="form-control"
-                    placeholder="Search.."
-                    aria-controls="DataTables_Table_0"
-                  />
-                </label>
-              </div>
-            </div>
-      </div>
-    </div>
+    <h5 className="card-title">List Customer</h5>
+    
   </div>
   <div className="card-datatable table-responsive">
     <div
@@ -185,11 +169,8 @@ function CardListCustomers() {
              
             <td>
               <div className="d-inline-block text-nowrap">
-              <span onClick={()=>dispatch(DeleteUser(e._id))}><Icon path={mdiDeleteAlert} size={1} /></span>
-             
-              
-              <Link to={`/profile/${e._id}`}><Icon path={mdiEyeSettings} size={1} /></Link>
-
+              <span onClick={()=>dispatch(DeleteOneCustomer(e._id))}><Icon path={mdiDeleteAlert} size={1} /></span>
+              <Link to={`/admin/settings-customer/${e._id}`}><Icon path={mdiEyeSettings} size={1} /></Link>
               </div>
              </td> 
             
@@ -201,71 +182,7 @@ function CardListCustomers() {
            
         </tbody>
       </table>
-      <div className="row mx-1">
-        <div className="col-sm-12 col-md-6">
-          <div
-            className="dataTables_info"
-            id="DataTables_Table_0_info"
-            role="status"
-            aria-live="polite"
-          >
-            Showing 1 to 10 of 50 entries
-          </div>
-        </div>
-        <div className="col-sm-12 col-md-6">
-          <div
-            className="dataTables_paginate paging_simple_numbers"
-            id="DataTables_Table_0_paginate"
-          >
-            <ul className="pagination">
-              <li
-                className="paginate_button page-item previous disabled"
-                id="DataTables_Table_0_previous"
-              >
-                <a
-                  aria-controls="DataTables_Table_0"
-                  aria-disabled="true"
-                  role="link"
-                  data-dt-idx="previous"
-                  tabIndex={0}
-                  className="page-link"
-                >
-                  Previous
-                </a>
-              </li>
-              <li className="paginate_button page-item active">
-                <a
-                  href="#"
-                  aria-controls="DataTables_Table_0"
-                  role="link"
-                  aria-current="page"
-                  data-dt-idx={0}
-                  tabIndex={0}
-                  className="page-link"
-                >
-                  1
-                </a>
-              </li>
-             
-              <li
-                className="paginate_button page-item next"
-                id="DataTables_Table_0_next"
-              >
-                <a
-                  href="#"
-                  aria-controls="DataTables_Table_0"
-                  role="link"
-                  data-dt-idx="next"
-                  tabIndex={0}
-                  className="page-link"
-                >
-                  Next
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+    
     </div>
   </div>
  

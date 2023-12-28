@@ -5,7 +5,7 @@ const {  AddProduct, DeletProduct, UpdateProduct, findProduct, deletProducts, ge
 productRoute.get('/all',getProduct)
 productRoute.get('/detailprod/:id',findProduct)
 productRoute.post('/addproduct',productvalidation,validation,AddProduct)
-productRoute.put('/updateprod/:id',validation,UpdateProduct)
+productRoute.put('/updateprod/:id',productvalidation,validation,UpdateProduct)
 productRoute.delete('/deleteprod/:id',DeletProduct)
 productRoute.delete('/deletemanyprod',deletProducts)
 productRoute.get('/prodcatg/:name',getProductCateg)

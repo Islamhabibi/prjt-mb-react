@@ -131,7 +131,7 @@ function CardAddTeam() {
                             <div className="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" />
                         </div>
                         <div className="form-floating form-floating-outline mb-4 fv-plugins-icon-container">
-                            <div class="form-check mb-2">
+                            <div className="form-check mb-2">
 
                                 <input
                                     type="radio"
@@ -142,20 +142,20 @@ function CardAddTeam() {
                                     //defaultChecked={(data.isEnabled)===true ? "Checked" : ""}
                                     onChange={(e) => { setIsEnabled(true) }}
                                 />
-                                <label class="form-check-label" for="active">Active</label>
+                                <label className="form-check-label" for="active">Active</label>
                             </div>
-                            <div class="form-check">
+                            <div className="form-check">
                                 <input
                                     type="radio"
                                     id="desactive"
                                     name="false"
-                                    class="form-check-input"
+                                    className="form-check-input"
                                     value="inactive"
                                     required=""
                                     defaultChecked=""
                                     onChange={(e) => { setIsEnabled(false) }}
                                 />
-                                <label class="form-check-label" for="desactive">Desactive</label>
+                                <label className="form-check-label" for="desactive">Desactive</label>
                             </div>
 
                             <div className="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" />

@@ -32,10 +32,10 @@ exports.Register = async (req,res)=>
        Phone,Adress,Adress_Additional,Postal_code,
         City,Country,Social_title
     }=req.body
-    console.log(req.body)
+   // console.log(req.body)
     //chek if user exists
     const userExist = await Customer.findOne({Email})
-    console.log(userExist)
+    //console.log(userExist)
     if (userExist){
         res.status(400)
         .send({message:'User  already exits',userExist})
@@ -92,7 +92,7 @@ const generateToken = (id) =>
  * @desc Login
  * @access Public
  */
-exports.LoginUser= async (req,res)=>
+exports.LoginCustomer= async (req,res)=>
 {
     //get user data 
     const {Email,Password} = req.body
@@ -136,7 +136,7 @@ exports.UpdateUser = async (req, res) => {
                    Phone,Adress,Adress_Additional,Postal_code,
                     City,Country,Social_title
                  } = req.body;
-                console.log(req.body)
+               // console.log(req.body)
                 //hash password
                 if (Password) {
                     const salt = await bcrypt.genSalt(10);

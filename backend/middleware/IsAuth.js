@@ -6,7 +6,7 @@ exports.IsAuth=async(req,res,next)=>{
     try {
         //
         const decode=jwt.decode(token)
-        console.log(decode)
+        //console.log(decode)
         if(!decode){
             res.status(400).send({msg:'you are not authorized'})
         }
@@ -22,7 +22,7 @@ exports.IsAuthCustomer=async(req,res,next)=>{
     try {
         //
         const decode=jwt.decode(token)
-        console.log(decode)
+       // console.log(decode)
         if(!decode){
             res.status(400).send({msg:'you are not authorized'})
         }

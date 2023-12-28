@@ -23,7 +23,7 @@ exports.getProductCateg = async (req,res)=>{
            
            res.status(200)
         .send({message:'ok',ProductCatg})
-        console.log(ProductCatg)
+       // console.log(ProductCatg)
     }else{
       res.status(200)
         .send({message:'Aucun produits',ProductCatg})
@@ -50,7 +50,7 @@ exports.AddProduct = async (req, res) => {
       const { Name } = req.body;
   
       // Check if product exists
-      const prodExists = await products.find(req.params.name);
+      const prodExists = await products.findOne({Name});
   
       if (prodExists) {
         return res.status(400).json({
@@ -63,7 +63,7 @@ exports.AddProduct = async (req, res) => {
       const product = await products.create(req.body);
   
       if (product) {
-        console.log(product);
+      
         return res.status(200).json({
           _id: product.id,
           Name: product.Name,
@@ -101,8 +101,8 @@ exports.UpdateProduct = async(req,res)=>{
     try {
         const product = await products
             .findByIdAndUpdate(req.params.id,{$set:req.body})
-        res.status(200)
-        .send({message:"product modifie",product})    
+            res.status(200)
+            .send({message:"Modified Product ",product})    
     } catch (error) {
         res.status(500)
         .send({message:"erreur"})

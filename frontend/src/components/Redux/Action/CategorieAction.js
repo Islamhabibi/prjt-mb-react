@@ -17,8 +17,8 @@ export const GetCategorie=(id) => async(dispatch) =>
     try {
         const res= await axios
             .get('/categories/detailcatg/'+id)
-            .then((res)=>dispatch({type:ONECATEGORIE,payload:res.data.ProductCatg}))
-           // console.log(res)
+            .then((res)=>dispatch({type:ONECATEGORIE,payload:res.data.OneCategorie}))
+           //console.log(res)
     } catch (error) {
         console.log(error)
     }
@@ -30,7 +30,7 @@ export const AddCategorie=(data,navigate) => async (dispatch) =>
         const res = await axios
             .post('/categories/addcategorie',data)//team (dans le server)/ dans le teamRoutes
             .then((res) => (GetCategories()));
-            navigate('/category-list')
+            navigate('/admin/category-list')
     } catch (error) {
         console.log(error)
     }
@@ -52,7 +52,7 @@ export const Updatecategorie =(id,data,navigate) => async (dispatch) =>
         const res = await axios
             .put('/categories/updatecatg/'+id,data)
             .then((res)=>dispatch(GetCategorie(id)))
-            navigate('/category-list')
+            navigate('/admin/category-list')
     } catch (error) {
         console.log(error);
     }

@@ -3,10 +3,11 @@ import Icon from '@mdi/react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { DeleteCategorie, GetCategorie, GetCategories } from '../../Redux/Action/CategorieAction'
  import { DeleteProduct, GetAllProducts } from '../../Redux/Action/ProductAction'
  import Button from 'react-bootstrap/Button';
-import Navbar from '../../Navbars/Navbar'
+
+import FooterAdmin from '../../Footers/FooterAdmin'
+import AdminNavbar from '../../Navbars/AdminNavbar'
 function truncateText(text, maxLength) {
   if (typeof text !== 'string' || text.length <= maxLength) {
     return text;
@@ -22,55 +23,15 @@ function CardsListProduct() {
   },[])
   const userFormState = useSelector((state)=> state.product.products)
   
-  console.log(userFormState)
+  //console.log(userFormState)
  
   return (
     < >
-    <Navbar/>
+    <AdminNavbar/>
          <div className="container-xxl flex-grow-1 container-p-y">
   {/* Users List Table */}
   <div className="card">
-    <div className="card-header">
-      <h5 className="card-title">Search Filter</h5>
-      <div className="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
-        <div className="col-md-4 user_role">
-          <select id="UserRole" className="form-select text-capitalize">
-            <option value=""> Select Statuts </option>
-            <option value="Admin">Admin</option>
-            <option value="Author">Author</option>
-            <option value="Editor">Editor</option>
-            <option value="Maintainer">Maintainer</option>
-            <option value="Subscriber">Subscriber</option>
-          </select>
-        </div>
-        <div className="col-md-4 user_plan">
-          <select id="UserPlan" className="form-select text-capitalize">
-            <option value=""> Select Plan </option>
-            <option value="Basic">Basic</option>
-            <option value="Company">Company</option>
-            <option value="Enterprise">Enterprise</option>
-            <option value="Team">Team</option>
-          </select>
-        </div>
-        <div className="col-md-4 user_status">
-          <select
-            id="FilterTransaction"
-            className="form-select text-capitalize"
-          >
-            <option value=""> Select Status </option>
-            <option value="Pending" className="text-capitalize">
-              Pending
-            </option>
-            <option value="Active" className="text-capitalize">
-              Active
-            </option>
-            <option value="Inactive" className="text-capitalize">
-              Inactive
-            </option>
-          </select>
-        </div>
-      </div>
-    </div>
+    
     <div className="card-datatable table-responsive">
       <div
         id="DataTables_Table_0_wrapper"
@@ -79,22 +40,7 @@ function CardsListProduct() {
         <div className="row mx-1">
           <div className="col-md-2 d-flex align-items-center justify-content-md-start justify-content-center">
             <div className="dt-action-buttons">
-              <div className="dt-buttons">
-                <button
-                  className="dt-button buttons-collection dropdown-toggle btn btn-label-secondary"
-                  tabIndex={0}
-                  aria-controls="DataTables_Table_0"
-                  type="button"
-                  aria-haspopup="dialog"
-                  aria-expanded="false"
-                >
-                  <span>
-                    <i className="mdi mdi-export-variant me-1" />{" "}
-                    <span className="d-none d-sm-inline-block">Export</span>
-                  </span>
-                  <span className="dt-down-arrow">▼</span>
-                </button>{" "}
-              </div>
+              
             </div>
           </div>
           <div className="col-md-10">
@@ -105,12 +51,7 @@ function CardsListProduct() {
                   className="dataTables_filter"
                 >
                   <label>
-                    <input
-                      type="search"
-                      className="form-control"
-                      placeholder="Search.."
-                      aria-controls="DataTables_Table_0"
-                    />
+                    
                   </label>
                 </div>
               </div>
@@ -284,7 +225,7 @@ function CardsListProduct() {
                   Active
                 </span>)
                 :
-                <span class="badge rounded-pill bg-label-secondary"
+                <span className="badge rounded-pill bg-label-secondary"
                  text-capitalized=""
                  >
                   Inactive</span>
@@ -295,12 +236,12 @@ function CardsListProduct() {
                 <div className="d-inline-block text-nowrap">
                 <span onClick={()=>dispatch(DeleteProduct(e._id))}><Icon path={mdiDeleteAlert} size={1} /></span>
                 <span>
-                  <Link to={`/settings-prouct/${e._id}`}>
+                  <Link to={`/admin/settings-product/${e._id}`}>
                   <Icon  path={mdiLeadPencil} size={1} />
                    </Link>
                    
                    </span>  
-                <Link to={`/settings/${e._id}`}><Icon path={mdiEyeSettings} size={1} /></Link>
+                
 
                 </div>
                </td> 
@@ -321,7 +262,7 @@ function CardsListProduct() {
     
   </div>
 </div>
- 
+ <FooterAdmin/>
     </>
   )
 }

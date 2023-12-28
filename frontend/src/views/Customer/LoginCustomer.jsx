@@ -1,16 +1,13 @@
 import React from 'react'
-import { mdiAccount, mdiBasket } from '@mdi/js';
-import Icon from '@mdi/react';
-import { useState } from 'react';
+  import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { LoginUser } from '../../components/Redux/Action/CustomerAction';
-import { Link } from 'react-router-dom';
-import Registercustomer from './Registercustomer';
-function LoginCustomer() {
+ import Registercustomer from './Registercustomer';
+import { Logincustomer } from '../../components/Redux/Action/CustomerAction';
+ function LoginCustomer() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -29,13 +26,13 @@ function LoginCustomer() {
   //console.log(formData)
   //function pour dispatche la fct dans l'actionteam
   const loginUser = () => {
-    dispatch(LoginUser(formData,navigate))
+    dispatch(Logincustomer(formData,navigate))
    
     handleClose()
   }
   return (
     <>
-      <span><Icon onClick={handleShow} path={mdiAccount} size={1} /></span>
+      <span onClick={handleShow}>Login </span>
       <Modal show={show} onHide={handleClose}>
         <div className="modal-dialog modal-lg modal-simple modal-edit-user">
           <div className="modal-content p-3 p-md-5">

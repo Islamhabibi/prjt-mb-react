@@ -15,12 +15,12 @@ const Dashboard = () => {
   return (
 
     <>
-      <div class="layout-wrapper layout-content-navbar  ">
-        <div class="layout-container">
+      <div className="layout-wrapper layout-content-navbar  ">
+        <div className="layout-container">
           <Navbarverticl/>
         
-        <div class="layout-page">
-          <div class="content-wrapper">
+        <div className="layout-page">
+          <div className="content-wrapper">
             <CardListCategories/>
           </div>
         </div>

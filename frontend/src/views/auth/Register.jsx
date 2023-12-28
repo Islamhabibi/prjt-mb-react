@@ -17,7 +17,7 @@ function Register() {
 
   //distraction de la data 
   
-  console.log(formData)
+  //console.log(formData)
 const onChange = e =>{
   setFormData({...formData,[e.target.name]:e.target.value})
 }
@@ -25,7 +25,7 @@ const onChange = e =>{
 const Adduserteam =()=>
 {
   dispatch(RegisterTeam(formData,navigate))
-  console.log(formData)
+  //console.log(formData)
 }
   return (
     <>
@@ -75,7 +75,7 @@ const Adduserteam =()=>
         type="text" 
         id="Phone" 
         name="Phone" 
-        class="form-control phone-number-mask" 
+        className="form-control phone-number-mask" 
         placeholder="202 555 0111"
         
       />

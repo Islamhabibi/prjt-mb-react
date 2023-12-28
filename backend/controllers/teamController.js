@@ -52,10 +52,10 @@ exports.getuser = async (req,res) =>
 exports.AddUser = async (req,res)=>
 {  
      const {FullName,UserName,Avatar,Email, Password,isEnabled,Profile,Phone}=req.body
-    console.log(req.body)
+   // console.log(req.body)
     //chek if user exists
     const userExist = await Team.findOne({Email})
-    console.log(userExist)
+    //console.log(userExist)
     if (userExist){
         res.status(400)
         .send({message:'User  already exits',userExist})
@@ -176,7 +176,7 @@ exports.UpdateUser = async (req, res) => {
            // if (req.body) {
                 
                 const { FullName, UserName, Avatar, Email, Password, isEnabled, Profile,Phone } = req.body;
-                console.log(req.body)
+                //console.log(req.body)
                 //hash password
                 if (Password) {
                     const salt = await bcrypt.genSalt(10);

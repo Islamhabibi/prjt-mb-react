@@ -151,7 +151,7 @@ button.list-group-item-primary.active {
 }
 
 .btn-primary {
-  color: #fff;
+  color: #fff !important;
   background-color: #3c3d91;
   border-color: #3c3d91;
 }

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Carousel from '../components/Customerview/Carousel'
 import ProductsCarousel from '../components/Customerview/ProductsCarousel'
 import Davider from '../components/Customerview/Davider'
@@ -6,20 +7,21 @@ import Collectioncateg from '../components/Customerview/Collectioncateg'
 import FooterCustomer from '../components/Footers/FooterCustomer'
 import ProductsGroupe from '../components/Customerview/ProductsGroupe'
 import FrontNavbar from '../components/Navbars/FrontNavbar'
-import { useDispatch, useSelector } from 'react-redux'
+
 import { GetAllProducts } from '../components/Redux/Action/ProductAction'
-import AdminNavbar from '../components/Navbars/AdminNavbar'
+
   function Index() {
     const dispatch = useDispatch()
     useEffect(()=>{
       dispatch(GetAllProducts())
     },[])
     const userFormState = useSelector((state)=> state.product.products) 
+    
   return (
     <>
-    <AdminNavbar/>
+    <FrontNavbar/>
       <Carousel/>
-      <div class="container py-5">
+      <div className="container py-5">
         <Collectioncateg/>
         <section className="py-5">
         <div className="container py-5">
@@ -32,9 +34,9 @@ import AdminNavbar from '../components/Navbars/AdminNavbar'
         </section>
       </div>
       <Davider/>
-      <div class="container py-5">
+      <div className="container py-5">
         <section className="py-5">
-          <header class="mb-3 text-center">
+          <header className="mb-3 text-center">
             <p className="small text-muted small text-uppercase mb-1">
               Made the hard way
             </p>

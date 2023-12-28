@@ -100,7 +100,7 @@ exports.UpdateCategorie = async (req,res)=>
             .findByIdAndUpdate(req.params.id,{$set:req.body})
             res.status(200)
             .send({message:"Modified category ",categorieUpdate})     
-            console.log(req.params.id)
+            //console.log(req.params.id)
     } catch (error) {
         res.status(400)
         throw new Error ('Error in edit category ')

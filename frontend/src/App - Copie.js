@@ -52,7 +52,7 @@ function App() {
     <Dashboard/>
 <Navbar/>
     <>
-    <div class="content-wrapper">
+    <div className="content-wrapper">
     <CardListUseres/>
     </div>
     </>

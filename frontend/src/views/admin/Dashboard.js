@@ -1,7 +1,6 @@
 import React from 'react'
 import FooterAdmin from '../../components/Footers/FooterAdmin'
 import AdminNavbar from '../../components/Navbars/AdminNavbar'
-import Navbar from '../../components/Navbars/Navbar'
 import 'bootstrap/dist/css/bootstrap.min.css';
 function Dashboard() {
   return (
@@ -14,7 +13,7 @@ function Dashboard() {
     {/* Layout container */}
     <div className="layout-page">
       {/* Navbar */}
-      <Navbar/>
+      <AdminNavbar/>
       {/* / Navbar */}
       {/* Content wrapper */}
       <div className="content-wrapper">

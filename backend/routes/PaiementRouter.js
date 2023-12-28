@@ -5,7 +5,7 @@ const stripe = Stripe('sk_test_51OKMreBk4u6Ymp7ZbxjLV3d5yLmRZqFI4U85hHR7SqZiYN75
 const routerPayment= express.Router()
 
 routerPayment.post('/create-checkout-session', async(req,res)=>{
-    console.log(req.body)
+   // console.log(req.body)
     const line_items=req.body.basket.map(item=>{//{"state":[{product:{info produit,qt:3},}]}
         return {
                 price_data: {

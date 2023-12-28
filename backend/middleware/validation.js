@@ -3,7 +3,7 @@ const {body,  validationResult}= require("express-validator")
 exports.categorievalidation= [
     body("Name", "You have to put a category name").notEmpty(),
     body("Name", "Minimum length 4 characters").isLength({min:4})
-]
+] 
 exports.teamvalidation= [
     body("FullName","You have to put your first name").notEmpty(),
     body("UserName","You have to put your Username").notEmpty(),
@@ -18,11 +18,11 @@ exports.customervalidation= [
 ]
 exports.loginvalidation= [
     body("Email","email is note valide").isEmail(),
-    body("Password","minimum length 8 cara").isLength({min:7})
+    body("Password","minimum length 8 cara").isLength({min:8})
 ]
 exports.productvalidation= [
     body("Name","You have to put the name of product").notEmpty(),
-    body("Name","minimum length 4 cara").isLength({min:4})
+    body("Name","minimum length 3 cara").isLength({min:3})
 ]
 exports.validation = (req,res,next)=>{
     const error = validationResult(req)

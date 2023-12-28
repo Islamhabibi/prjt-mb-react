@@ -12,7 +12,7 @@ export const GetAllProducts = () => async(dispatch) =>
     }
 }
 export const GetProductsbyCatg = (name) => async(dispatch) => 
-{console.log(name)
+{//console.log(name)
     try {
       
         const res = await axios
@@ -32,7 +32,7 @@ export const AddProduct = (data,navigate) => async (dispatch) => {
       const res = await axios
         .post('/product/addproduct/',data)
         .then((res) =>dispatch (GetAllProducts()))
-        navigate('/product-list')
+        navigate('/admin/product-list')
          
     } catch (error) {
       console.log(error);
@@ -55,11 +55,11 @@ export const AddProduct = (data,navigate) => async (dispatch) => {
       const res = await axios
         .put("/product/updateprod/"+id,data)
         .then((res) => dispatch(GetAllProducts()));
-        navigate('/product-list')
+        navigate('/admin/product-list')
+        //console.log(res)
     } catch (error) {
       console.log(error);
     }
-
   };
   export const FindProduct = (id) => async (dispatch) => {
     try {
@@ -77,7 +77,7 @@ export const AddProduct = (data,navigate) => async (dispatch) => {
       const res= await axios
         .delete('/product/deletemanyprod',data)
         .then((res)=>dispatch(GetAllProducts()))
-        navigate('/product-list')
+        navigate('/admin/product-list')
     } catch (error) {
       console.log(error);
     }
