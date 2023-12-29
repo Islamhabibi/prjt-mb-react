@@ -127,7 +127,7 @@ exports.LoginCustomer= async (req,res)=>
  */
 exports.UpdateUser = async (req, res) => {
     try {
-        const userUpdate = await Customer.findById(req.params.id);
+        const userUpdate = await Customer.findById({id});
         if (userUpdate) {
            // if (req.body) {
                 

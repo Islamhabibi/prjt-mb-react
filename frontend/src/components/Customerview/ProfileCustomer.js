@@ -1,24 +1,22 @@
 import React, { useEffect } from 'react'
-import AdminNavbar from '../../Navbars/AdminNavbar'
-import { useParams } from 'react-router'
+ import { useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { GetUser, } from '../../Redux/Action/CustomerAction'
+import { GetUser,getcurrentcustomer } from '../../components/Redux/Action/CustomerAction'
 import Icon from '@mdi/react'
 import { mdiBadgeAccount, mdiHomeMapMarker } from '@mdi/js'
-import FooterAdmin from '../../Footers/FooterAdmin'
-import Col from 'react-bootstrap/Col';
+ import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
-import { getcurrent } from '../../Redux/Action/TeamAction'
-import FrontNavbar from '../../Navbars/FrontNavbar'
-function CardsProfileCustomer() {
+ import FrontNavbar from '../../components/Navbars/FrontNavbar'
+import FooterCustomer from '../Footers/FooterCustomer'
+function ProfileCustomer() {
     const id = useParams()
     //console.log(id)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(GetUser(id.id))
-        dispatch(getcurrent())
+        dispatch(getcurrentcustomer())
         
     }, [])
     const user = useSelector((state) => state.customer.customer)
@@ -27,8 +25,7 @@ function CardsProfileCustomer() {
     return (
         <>
             
-            <AdminNavbar />
-             
+            <FrontNavbar/>             
             
             <div className="container-xxl flex-grow-1 container-p-y">
                 <h4 className="py-3 mb-4">
@@ -177,9 +174,9 @@ function CardsProfileCustomer() {
                 </div>
 
             </div>
-            <FooterAdmin />
+            <FooterCustomer />
         </>
     )
 }
 
-export default CardsProfileCustomer
+export default ProfileCustomer

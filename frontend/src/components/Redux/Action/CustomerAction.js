@@ -41,7 +41,7 @@ export const UpdateUser = (id,data,navigate) => async(dispatch) =>
 {
     try {
         const res=await axios
-            .put('/customer/updateuser/'+id,data)
+            .put('/customer/updateuser/',data)
             .then((res)=>dispatch(GetUser(id)))
              navigate('/dashboard')
     } catch (error) {
@@ -72,7 +72,7 @@ export const Logincustomer = (data,navigate) => async (dispatch) =>
     }
 }
 
-export const getcurrent=()=>async(dispatch)=>
+export const getcurrentcustomer=()=>async(dispatch)=>
 {
     const config={
         headers:{token:localStorage.getItem("tokenCustomer")}

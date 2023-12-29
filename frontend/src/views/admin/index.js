@@ -1,6 +1,4 @@
 // ** MUI Imports
-import Grid from '@mui/material/Grid'
-import Trophy from '../dashboard/Trophy'
 import Navbarverticl from '../../components/Navbars/navbarverticl'
 import CardListCategories from '../../components/Cards/CardsCategories/CardListCategories'
 

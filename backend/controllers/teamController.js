@@ -129,7 +129,7 @@ exports.LoginUser= async (req,res)=>
         .send(error)
     }
 }
-/**
+/** 
  * @route PUT /team/updateuser/id
  * @desc Update  user
  * @access Prive

@@ -10,14 +10,14 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Icon from '@mdi/react';
 import logo from "../../assets/img/logo/mb-mt.png"   
 import LoginCustomer from '../../views/Customer/LoginCustomer';
-import { getcurrent, logout } from '../Redux/Action/CustomerAction'; 
+import { getcurrentcustomer, logout } from '../Redux/Action/CustomerAction'; 
 
 const FrontNavbar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const basket = useSelector(state=>state.product.basket)
   useEffect(()=>{
-    dispatch(getcurrent())
+    dispatch(getcurrentcustomer())
   },[])
   const user= useSelector(state=>state.customer.customer)
   //console.log(user)
@@ -52,7 +52,7 @@ const FrontNavbar = () => {
             }
             {user?.LastName? 
               <>
-                  <Nav.Link>Hello, {user.FirstName} </Nav.Link>
+                  <Nav.Link href={'/my-profile/'}>Hello, {user.FirstName} </Nav.Link>
                   <Nav.Link  onClick={()=>dispatch(logout(navigate))}>
                     Logout
                   </Nav.Link>

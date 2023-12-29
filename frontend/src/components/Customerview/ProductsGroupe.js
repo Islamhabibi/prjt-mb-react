@@ -4,6 +4,8 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { addToBasket } from '../Redux/Action/ProductAction';
 import { useDispatch } from 'react-redux';
+import { mdiArrowExpandAll } from '@mdi/js';
+import Icon from '@mdi/react';
 function ProductsGroupe({ data }) {
   const dispatch = useDispatch()
   const [key, setKey] = useState('Droguerie');
@@ -44,7 +46,7 @@ function ProductsGroupe({ data }) {
                               className="btn btn-sm btn-outline-dark"
                               href={`/detail-product/${e._id}`}
                             >
-                              <i className="fas fa-expand" />
+                              <Icon path={mdiArrowExpandAll} size={1} />
                             </a>
                           </li>
                         </ul>
@@ -90,7 +92,7 @@ function ProductsGroupe({ data }) {
                               href={`/detail-product/${e._id}`}
 
                             >
-                              <i className="fas fa-expand" />
+                              <Icon path={mdiArrowExpandAll} size={1} />
                             </a>
                           </li>
                         </ul>
@@ -136,7 +138,7 @@ function ProductsGroupe({ data }) {
                               href={`/detail-product/${e._id}`}
 
                             >
-                              <i className="fas fa-expand" />
+                              <Icon path={mdiArrowExpandAll} size={1} />
                             </a>
                           </li>
                         </ul>

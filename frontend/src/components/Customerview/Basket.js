@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
-import { Button } from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import { DeleteProduct, removeFromBasket } from '../Redux/Action/ProductAction';
+import {  removeFromBasket } from '../Redux/Action/ProductAction';
 import FrontNavbar from '../Navbars/FrontNavbar';
 import { Link } from 'react-router-dom';
 import Icon from '@mdi/react';
 import { mdiTrashCan } from '@mdi/js';
 import FooterCustomer from '../Footers/FooterCustomer';
-import { getcurrent } from '../Redux/Action/CustomerAction';
+import { getcurrentcustomer } from '../Redux/Action/CustomerAction';
 import LoginCustomer from '../../views/Customer/LoginCustomer';
 
 
@@ -20,21 +17,20 @@ function Basket() {
   const basket = useSelector(state => state.product.basket) //state.basket dans le reducer
   // console.log(basket[0].quantity)
   useEffect(()=>{
-    dispatch(getcurrent())
-  },[])
+    dispatch(getcurrentcustomer())
+  },[]) 
   const user= useSelector(state=>state.customer.customer)
   //console.log(user)
   const paiement = async () => {
     const res = await axios
       .post('/paiement/create-checkout-session', { basket })
-      .then(res => {
+      .then((res) => {
         if (res.data.url) {
           window.location.href = res.data.url
         }
       })
   }
-  const [quantity, setQuantity] = useState(0)
-
+ 
   {/** groupe les memes product */ }
   const groupProducts = () => {
     const groupedProducts = [];
